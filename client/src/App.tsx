@@ -1,8 +1,17 @@
 import React from 'react';
+import {Store} from 'redux'
+import { History} from 'history'
+import {ApplicationState} from './store'
 import logo from './logo.svg';
 import './App.css';
 
-const App: React.FC = () => {
+interface AppProps {
+  store: Store<ApplicationState>
+  history: History
+}
+
+
+const App: React.FC<AppProps> = ({store, history}) => {
   return (
     <div className="App">
       <header className="App-header">
