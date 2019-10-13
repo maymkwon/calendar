@@ -13,7 +13,7 @@ function* changeDates(action: ReturnType<typeof changeDate>) {
 }
 
 function* watchChangeDate() {
-  yield takeEvery(CalendarActionTypes.CHANGE_DATE, changeDate)
+  yield takeEvery(CalendarActionTypes.CHANGE_DATE, changeDates)
 }
 function* calendarSaga() {
   yield fork(watchChangeDate)

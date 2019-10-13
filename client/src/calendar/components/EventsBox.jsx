@@ -47,6 +47,7 @@ class EventsBox extends Component {
             return (
               <div
                 id={o.start}
+                key={o.start}
                 draggable={true}
                 onDragStart={this.onDragStart}
                 className="event-list__item"

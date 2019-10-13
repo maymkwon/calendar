@@ -13,6 +13,7 @@ const DefaultButton = styled.button`
   -webkit-font-smoothing: inherit;
   -moz-oxs-font-smoothing: inherit;
   -webkit-appearance: none;
+  outline:none;
 `;
 
 export const SCArrowBtn = styled(DefaultButton)`

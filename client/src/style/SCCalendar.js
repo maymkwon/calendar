@@ -25,12 +25,10 @@ export const CWeek = styled.div.attrs({ className: 'c-week' })`
 
   &.c-view__header {
     position: sticky;
-    top: 50px;
+    top: 51px;
     background: #fff;
     z-index: 999;
-    &.sticky {
-      box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.08);
-    }
+    
   }
 
   & + & {

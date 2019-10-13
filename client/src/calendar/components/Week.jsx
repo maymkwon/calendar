@@ -24,12 +24,8 @@ class Week extends Component {
     const dataId = e.dataTransfer.getData('text');
     const dragEl = document.getElementById(dataId);
     const dropZone = document.getElementById(id);
-    if (dropZone.childElementCount === 0) {
-      dragEl.style.backgroundColor = 'blue';
-      dropZone.appendChild(dragEl);
-    } else {
-      alert('err');
-    }
+    dragEl.style.backgroundColor = 'blue';
+    dropZone.appendChild(dragEl);
     e.dataTransfer.clearData();
   };
 

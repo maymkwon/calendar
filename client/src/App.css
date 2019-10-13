@@ -1,22 +1,25 @@
-.App {
-  text-align: center;
+#root{
+  min-width: 1280px;
 }
-
-.App-logo {
-  height: 40vmin;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.dfac{
   display: flex;
-  flex-direction: column;
+  align-items: center;
+}
+.dfacjcc{
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+}
+.dfacjsb{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.App-link {
-  color: #09d3ac;
+#view-header{
+  border-bottom: 1px solid #eee;
+}
+
+.c-view__header.sticky {
+  box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.08);
 }

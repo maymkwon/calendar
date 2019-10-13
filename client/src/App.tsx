@@ -2,34 +2,30 @@ import React from 'react';
 import {Store} from 'redux'
 import { History} from 'history'
 import {ApplicationState} from './store'
-import logo from './logo.svg';
+import { connect, Provider } from 'react-redux';
+import {changeDate} from './store/calendar/action'
+import Calendar from './calendar/Calendar';
+import { ConnectedRouter } from 'connected-react-router';
+import Routes from './routes'
+import ToastContainer from './common/ToastContainer'
 import './App.css';
 
-interface AppProps {
+type AppProps = {
   store: Store<ApplicationState>
   history: History
 }
 
-
 const App: React.FC<AppProps> = ({store, history}) => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+  <Provider store={store}>
+    <ConnectedRouter history={history}>
+      <Routes />
+      <ToastContainer />
+    </ConnectedRouter>
+  </Provider>
   );
 }
 
-export default App;
+export default App
+
+
