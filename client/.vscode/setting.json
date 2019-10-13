@@ -1,0 +1,19 @@
+{
+  "editor.tabSize": 2,
+  "editor.wordWrap": "on",
+  "workbench.iconTheme": "vs-seti",
+  "window.zoomLevel": 0,
+  "editor.renderIndentGuides": true,
+  "editor.fontSize": 14,
+  "atomKeymap.promptV3Features": true,
+  "editor.multiCursorModifier": "ctrlCmd",
+  "editor.formatOnPaste": true,
+  "explorer.confirmDragAndDrop": false,
+  "emmet.syntaxProfiles": {
+    "javascript": "jsx"
+  },
+  "editor.formatOnSave": true,
+  "javascript.format.enable": false,
+  "prettier.eslintIntegration": true,
+  "prettier.singleQuote": true
+}
