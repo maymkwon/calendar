@@ -21,7 +21,6 @@ class CalendarView extends Component {
   render() {
     const { view, date } = this.props;
     let convertEventData = this.convertData();
-    console.log('convertEventData', convertEventData);
     const Components = {
       [componentView.MONTH]: Month,
       [componentView.WEEK]: Week

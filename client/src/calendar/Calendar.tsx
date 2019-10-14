@@ -4,53 +4,14 @@ import CalendarView from './components/CalendarView';
 import moment, { Moment as MomentTypes }from 'moment';
 import { componentView, StoryageKey } from '../utils/constants';
 import { connect, Provider } from 'react-redux';
-import { changeDate } from '../store/calendar/action'
+import { changeDate, getEventList,createEvent } from '../store/calendar/action'
 import { showToast } from '../store/system/action'
 import { DateData } from '../store/calendar/types'
 import { ApplicationState } from '../store'
-
+import Popup from '../common/popup';
+import api from '../common/api'
 import 'moment/locale/ko';
 
-// moment.locale('ko');
-// interface DateData {
-//   title:string,
-//   start: any
-//   end: any
-//   type:number
-// }
-
-// let eventData: DateData[] = [
-//   {
-//     title: 'test1test1test1test1test1test1test1test1test1test1test1',
-//     start: moment('2019-10-12 04:00').format('x') as any * 1,
-//     end: moment('2019-10-12 05:00').format('x') as any * 1,
-//     type: 1
-//   },
-//   {
-//     title: 'test1',
-//     start: moment('2019-10-6 05:00').format('x') as any * 1,
-//     end: moment('2019-10-6 06:00').format('x') as any * 1,
-//     type: 1
-//   },
-//   {
-//     title: 'test1',
-//     start: moment('2019-10-8 06:00').format('x')as any * 1,
-//     end: moment('2019-10-8 07:00').format('x')as any * 1,
-//     type: 1
-//   },
-//   {
-//     title: 'test1',
-//     start: moment('2019-10-12 07:00').format('x')as any * 1,
-//     end: moment('2019-10-12 08:00').format('x')as any * 1,
-//     type: 1
-//   },
-//   {
-//     title: 'test1',
-//     start: moment('2019-10-12 08:00').format('x')as any * 1,
-//     end: moment('2019-10-12 09:00').format('x')as any * 1,
-//     type: 1
-//   }
-// ];
 
 interface Props {
   date: MomentTypes,
@@ -60,6 +21,8 @@ interface Props {
 interface PropsFromDispatch {
   changeDate: typeof changeDate
   showToast: typeof showToast
+  getEventList: typeof getEventList
+  createEvent: typeof createEvent
 }
 
 type AllProps = Props & PropsFromDispatch
@@ -118,7 +81,12 @@ class Calendar extends Component<AllProps, State> {
       );
       observer.observe(triggerEl);
     }
+
+    this.props.getEventList()
+    
   }
+
+
 
   onChangeView = (view) => {
     this.setState(
@@ -129,15 +97,25 @@ class Calendar extends Component<AllProps, State> {
     );
   };
 
+  open = () => {
+    let data1 = {
+      id: 2,
+      title: '테스트2',
+      start: 123,
+      end: 999,
+      type: 2
+    };
+    Popup.createEventPopup()
+    // api.post('/create', {data:data1})
+    this.props.showToast({ title: '???', content: 'aaa' })
+  }
   render() {
-    const { date, eventData } = this.props;
+    const { date, eventData, createEvent } = this.props;
     const {  view } = this.state;
-    console.log('Calendar', eventData);
-    console.log('Calendar', this.props);
     return (
       <div>
         <div style={{ height: 1 }} ref={this.Trigger} />
-        <button onClick={() =>this.props.showToast({title:'???', content:'aaa'})}>aaaa</button>
+        <button onClick={this.open}>aaaa</button>
         <Controls
           date={date}
           view={view}
@@ -150,6 +128,7 @@ class Calendar extends Component<AllProps, State> {
           view={view}
           onSelectDate={this.onSelectDate}
           events={eventData}
+          createEvent={createEvent}
         />
       </div>
     );
@@ -159,12 +138,14 @@ class Calendar extends Component<AllProps, State> {
 
 const mapStateToProps = ({ calendar }: ApplicationState) => ({
   date: calendar.date,
-  eventData: calendar.eventData
+  eventData: calendar.events
 })
 
 const mapDispatchToProps: PropsFromDispatch = {
   changeDate,
-  showToast
+  showToast,
+  getEventList,
+  createEvent
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Calendar)

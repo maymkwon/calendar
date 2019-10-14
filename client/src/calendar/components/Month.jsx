@@ -6,13 +6,17 @@ import { DataKeyFormat } from '../../utils/constants';
 import { extendMoment } from 'moment-range';
 import cn from 'classnames';
 import EventsBox from './EventsBox';
+import Popup from '../../common/popup';
 
 const moment = extendMoment(Moment);
 let weekdays = moment.weekdaysShort();
 
 class CalendarView extends Component {
+
   onSelectDate = (e, date) => {
+    console.log(this.props)
     this.props.onSelectDate(date);
+    Popup.createEventPopup({date, createFunc:this.props.createEvent})
   };
 
   onDragOver = e => {
@@ -52,6 +56,7 @@ class CalendarView extends Component {
             let datakey = currentDay.format(DataKeyFormat.month);
             return (
               <CDay
+                key={datakey}
                 className={cn('c-day', {
                   selected: isSelected,
                   today: isToday,
@@ -77,8 +82,8 @@ class CalendarView extends Component {
         <CWeek
           id="view-header"
           className="c-view__header c-view__header--month">
-          {weekdays.map(dayText => {
-            return <CDay className="c-day">{dayText}</CDay>;
+          {weekdays.map((dayText,i) => {
+            return <CDay key={i} className="c-day">{dayText}</CDay>;
           })}
         </CWeek>
         {this.renderView()}

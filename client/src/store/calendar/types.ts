@@ -2,8 +2,13 @@ import { Moment as MomentTypes } from "moment";
 
 export enum CalendarActionTypes {
   CHANGE_DATE = '@@calendar/CHANGE_DATE',
-  TEST = '@@calendar/TEST'
+  GET_EVENT = '@@calendar/GET_EVENT',
+  SUCCESS_EVENT = '@@calendar/SUCCESS_EVENT',
+
+  CREATE_EVENT = '@@calendar/CREATE_EVENT',
+  SUCCESS_CREATE_EVENT = '@@calendar/SUCCESS_CREATE_EVENT'
 }
+
 export interface DateData {
   id:number
   title: string
@@ -11,10 +16,8 @@ export interface DateData {
   end: any
   type: number
 }
-// export interface DateData {
-//   date: MomentTypes
-// }
+
 export interface CalendarState {
   readonly date: MomentTypes
-   eventData: DateData[]
+   events: DateData[]
 }

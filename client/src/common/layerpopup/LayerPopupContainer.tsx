@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { EventName } from "./EventName";
 import { LayerKeyGen } from "./LayerKeyGen";
-import PropTypes from "prop-types";
 import { History } from "history";
 interface Props {
   history: History;
@@ -10,13 +9,20 @@ interface State {
   reload: number;
 }
 
-class LayerPopupContainer extends Component<Props, State> {
-  static contextTypes = {
-    router: PropTypes.shape({
-      route: PropTypes.object.isRequired
-    }).isRequired
-  };
+interface LayerType<T>{
+  [x:string]: any
+}
+interface LayerProps{
+  key:string
+  layerKey:string
+  location:object
+  history: object
+  layerCount:number
+}
 
+class LayerPopupContainer extends Component<Props, State> {
+ 
+  private layers: LayerType<LayerProps>
   constructor(props) {
     super(props);
     this.fireLayerEvent = this.fireLayerEvent.bind(this);
@@ -28,8 +34,8 @@ class LayerPopupContainer extends Component<Props, State> {
     this.state = {
       reload: 0
     };
+    this.layers = {};
   }
-  layers = {};
 
   fireLayerEvent(evt) {
     if (evt.type === EventName.showLayer) {
@@ -54,20 +60,19 @@ class LayerPopupContainer extends Component<Props, State> {
   render() {
     return (
       <React.Fragment>
-        {Object.keys(this.layers).map((layerKey, i) => {
-          const { route } = this.context.router;
+        {Object.keys(this.layers).map((layerkey, i) => {
           let layerProps = {
-            key: layerKey,
-            layerKey,
+            key: layerkey,
+            layerkey,
             location: this.props.history.location,
             history: this.props.history,
-            layerCount: Object.keys(this.layers).length
+            layercount: Object.keys(this.layers).length
           };
-          if (this.layers[layerKey]) {
-            if (typeof this.layers[layerKey] === "function") {
-              return this.layers[layerKey](layerProps);
+          if (this.layers[layerkey]) {
+            if (typeof this.layers[layerkey] === "function") {
+              return this.layers[layerkey](layerProps);
             } else {
-              return React.cloneElement(this.layers[layerKey], layerProps);
+              return React.cloneElement(this.layers[layerkey], layerProps);
             }
           } else {
             return null;

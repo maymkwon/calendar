@@ -21,7 +21,6 @@ const Div = styled.div`
 class ToastContainer extends Component {
   render() {
     const { toast} = this.props;
-    console.log('toastQueue',toast)
     return (
       <Div>
         <TransitionGroup appear>

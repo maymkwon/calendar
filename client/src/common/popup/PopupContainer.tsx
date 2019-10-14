@@ -72,39 +72,33 @@ export const Dim = styled.div`
 interface Props {
   location: any;
   history: any;
-  layerKey: any;
-  layerCount: any;
-  children: any;
-  LayerPopup: any;
+  layerkey: any;
+  layercount: any;
+  children: React.ReactElement;
   popupWidth: any;
   position: any;
-  fullpage: boolean;
 }
 
 class PopupContainer extends Component<Props> {
-  componentWillUnmount() {
-    document.body.style.overflow = "visible";
-  }
-
+  
   componentDidUpdate(prevProps, prevState) {
     document.body.style.overflow = "hidden";
   }
-
   componentDidMount() {
     document.body.style.overflow = "hidden";
   }
-
-  onClickCancel = () => {
-    this.props.LayerPopup.hide(this.props.layerKey);
-  };
+  componentWillUnmount() {
+    document.body.style.overflow = "visible";
+  }
+  
 
   render() {
     const newProps = {
       location: this.props.location,
       history: this.props.history,
-      layerKey: this.props.layerKey,
-      layerCount: this.props.layerCount,
-      LayerPopup: LayerPopup
+      layerkey: this.props.layerkey,
+      layercount: this.props.layercount,
+      layerpopup: LayerPopup
     };
     const screenHeight = window.innerHeight;
     const { popupWidth, position } = this.props;
@@ -112,19 +106,17 @@ class PopupContainer extends Component<Props> {
       <React.Fragment>
         <ModalWrapper
           position={position}
-          layerkey={this.props.layerKey}
+          layerkey={this.props.layerkey}
           popupWidth={popupWidth}
-          fullpage={this.props.fullpage}
         >
           <div className="modal-content">
             {React.cloneElement(this.props.children, newProps)}
           </div>
         </ModalWrapper>
         <Dim
-          layercount={this.props.layerCount}
+          layercount={this.props.layercount}
           screenheight={screenHeight}
-          layerkey={this.props.layerKey - 1}
-          // onClick={() => this.onClickCancel}
+          layerkey={this.props.layerkey - 1}
         />
       </React.Fragment>
     );

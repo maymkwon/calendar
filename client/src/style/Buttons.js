@@ -33,7 +33,19 @@ export const SCBasicBtn = styled(DefaultButton).attrs({
   border: 1px solid #eee;
   padding: 7px 12px;
   text-align: center;
+  
   &:hover:not(:disabled) {
     background-color: #eee;
+  }
+  &.red {
+    background-color:#ff2659;
+    color: #fff;
+  }
+  &.green {
+    background-color:#00ad48;
+    color: #fff;
+    &:hover{
+      background-color:rgba(0,173,72, 0.7);
+    }
   }
 `;

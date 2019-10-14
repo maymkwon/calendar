@@ -15,11 +15,9 @@ let directionStyle = {
 }
 
 const FadeIn = ({keyProps, inProps, duration=defaultDuration, children, style, ...rest}) => {
-  console.log('rest',rest)
   return (
     <Transition key={keyProps} in={rest.in} timeout={duration || defaultDuration} appear unmountOnExit>
       {status => {
-        console.log(status)
         return (
         <div style={{ ...defaultStyle,...style, ...directionStyle[status]}}>
           {children}

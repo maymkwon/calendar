@@ -4,8 +4,8 @@ import { extendMoment } from 'moment-range';
 import * as dateUtils from '../../utils/dates';
 import { DataKeyFormat } from '../../utils/constants';
 import { CView, CDayTime, CDayCol, CWeek, CDay } from '../../style/SCCalendar';
-import cn from 'classnames';
 import EventsBox from './EventsBox';
+import Popup from '../../common/popup';
 
 const moment = extendMoment(Moment);
 const timeSlot = dateUtils.getSlot();
@@ -14,6 +14,7 @@ let weekdays = moment.weekdaysShort();
 class Week extends Component {
   onSelectDate = (e, date) => {
     this.props.onSelectDate(date);
+    Popup.createEventPopup({date, createFunc:this.props.createEvent})
   };
 
   onDragOver = e => {
@@ -46,7 +47,6 @@ class Week extends Component {
 
   renderView = () => {
     const { events } = this.props;
-    console.log('WEEK DATA', events);
     let weekdays = dateUtils.getSlot();
     let { startDay, endDay, start } = this.getStartEndData();
 

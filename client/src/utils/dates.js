@@ -93,3 +93,14 @@ export const getSlot = () => {
 
   return items;
 };
+
+export const getTimeOption = () => {
+  let options = []
+  getSlot().forEach((o,i) => {
+    let obj = {}
+    obj.title = o.format('A h 시')
+    obj.value = o.format('HH:00')
+    options.push(obj)
+  })
+  return options
+}

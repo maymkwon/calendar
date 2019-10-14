@@ -14,17 +14,14 @@ export const InitalState: SystemState = fromJS({
 
 const pushToast = (state, toast) => {
   let getQueue = state.get('queue')
-  console.log('getQueue',getQueue)
   return state.set('queue', getQueue.push(new Toast(toast)))
 }
 const shiftToast = (state) => {
   let getQueue = state.get('queue')
-  console.log('shiftToast-getQueue', state.toJS())
   return state.set('queue', getQueue.shift())
 }
 
 const reducer: Reducer<SystemState> = (state = InitalState , action) => {
-  console.log('STATE', state)
   switch (action.type) {
     case SystemActionType.PUSH_TOAST_TO_QUE: {
       return pushToast(state, action.payload)

@@ -33,8 +33,9 @@ class EventsBox extends Component {
     e.dataTransfer.setData('text/plain', dataId);
     e.currentTarget.style.backgroundColor = 'red';
   };
-  onClickEvent = e => {
+  onClickEvent = (e, event) => {
     e.stopPropagation();
+    console.log(event)
   };
   render() {
     const { events, id } = this.props;
@@ -51,7 +52,7 @@ class EventsBox extends Component {
                 draggable={true}
                 onDragStart={this.onDragStart}
                 className="event-list__item"
-                onClick={this.onClickEvent}
+                onClick={(e) => this.onClickEvent(e, o)}
                 style={{
                   position: 'absolute',
                   top: `${i * 22}px`,
