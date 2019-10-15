@@ -13,6 +13,7 @@ let weekdays = moment.weekdaysShort();
 
 class Week extends Component {
   onSelectDate = (e, date) => {
+    e.preventDefault()
     this.props.onSelectDate(date);
     Popup.createEventPopup({date, createFunc:this.props.createEvent})
   };
@@ -46,7 +47,7 @@ class Week extends Component {
   };
 
   renderView = () => {
-    const { events } = this.props;
+    const { events, deleteEvent ,updateEvent} = this.props;
     let weekdays = dateUtils.getSlot();
     let { startDay, endDay, start } = this.getStartEndData();
 
@@ -68,7 +69,7 @@ class Week extends Component {
                 onDragOver={this.onDragOver}
                 onDrop={e => this.onDrop(e, datakey)}>
                 <strong>{currentDay.format('D')}</strong>
-                <EventsBox id={datakey} events={events[datakey] || []} />
+                <EventsBox id={datakey} events={events[datakey] || []} deleteEvent={deleteEvent} updateEvent={updateEvent}/>
               </CDayTime>
             );
           })}

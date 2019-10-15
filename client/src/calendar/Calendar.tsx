@@ -4,7 +4,7 @@ import CalendarView from './components/CalendarView';
 import moment, { Moment as MomentTypes }from 'moment';
 import { componentView, StoryageKey } from '../utils/constants';
 import { connect, Provider } from 'react-redux';
-import { changeDate, getEventList,createEvent } from '../store/calendar/action'
+import { changeDate, getEventList, createEvent, deleteEvent, updateEvent } from '../store/calendar/action'
 import { showToast } from '../store/system/action'
 import { DateData } from '../store/calendar/types'
 import { ApplicationState } from '../store'
@@ -23,6 +23,8 @@ interface PropsFromDispatch {
   showToast: typeof showToast
   getEventList: typeof getEventList
   createEvent: typeof createEvent
+  deleteEvent: typeof deleteEvent
+  updateEvent: typeof updateEvent
 }
 
 type AllProps = Props & PropsFromDispatch
@@ -97,25 +99,12 @@ class Calendar extends Component<AllProps, State> {
     );
   };
 
-  open = () => {
-    let data1 = {
-      id: 2,
-      title: '테스트2',
-      start: 123,
-      end: 999,
-      type: 2
-    };
-    Popup.createEventPopup()
-    // api.post('/create', {data:data1})
-    this.props.showToast({ title: '???', content: 'aaa' })
-  }
   render() {
-    const { date, eventData, createEvent } = this.props;
+    const { date, eventData, createEvent, deleteEvent, updateEvent } = this.props;
     const {  view } = this.state;
     return (
       <div>
         <div style={{ height: 1 }} ref={this.Trigger} />
-        <button onClick={this.open}>aaaa</button>
         <Controls
           date={date}
           view={view}
@@ -129,6 +118,8 @@ class Calendar extends Component<AllProps, State> {
           onSelectDate={this.onSelectDate}
           events={eventData}
           createEvent={createEvent}
+          deleteEvent={deleteEvent}
+          updateEvent={updateEvent}
         />
       </div>
     );
@@ -145,7 +136,9 @@ const mapDispatchToProps: PropsFromDispatch = {
   changeDate,
   showToast,
   getEventList,
-  createEvent
+  createEvent,
+  deleteEvent,
+  updateEvent
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Calendar)

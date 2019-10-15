@@ -14,7 +14,7 @@ let weekdays = moment.weekdaysShort();
 class CalendarView extends Component {
 
   onSelectDate = (e, date) => {
-    console.log(this.props)
+    e.preventDefault()
     this.props.onSelectDate(date);
     Popup.createEventPopup({date, createFunc:this.props.createEvent})
   };
@@ -30,10 +30,12 @@ class CalendarView extends Component {
     dragEl.style.backgroundColor = 'blue';
     dropZone.appendChild(dragEl);
     e.dataTransfer.clearData();
+
+    console.log()
   };
 
   renderView = () => {
-    const { date, events } = this.props;
+    const { date, events ,deleteEvent, updateEvent} = this.props;
     const today = moment();
     let weekdays = moment.weekdaysShort();
     const start = dateUtils.getStartOfMonth(date);
@@ -66,7 +68,7 @@ class CalendarView extends Component {
                 onDragOver={this.onDragOver}
                 onDrop={e => this.onDrop(e, datakey)}>
                 <strong className="dfacjcc">{day}</strong>
-                <EventsBox id={datakey} events={events[datakey] || []} />
+                <EventsBox id={datakey} events={events[datakey] || []} deleteEvent={deleteEvent}updateEvent={updateEvent}/>
               </CDay>
             );
           })}
@@ -77,6 +79,7 @@ class CalendarView extends Component {
   };
 
   render() {
+    console.log('???')
     return (
       <CView>
         <CWeek

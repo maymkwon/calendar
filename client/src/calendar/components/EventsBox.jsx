@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
 import * as dateUtils from '../../utils/dates';
+import Popup from '../../common/popup';
 const Div = styled.div.attrs({
   className: 'event-list'
 })`
@@ -35,7 +36,7 @@ class EventsBox extends Component {
   };
   onClickEvent = (e, event) => {
     e.stopPropagation();
-    console.log(event)
+    Popup.detailEventPopup({event, updateEvent: this.props.updateEvent,deleteEvent:this.props.deleteEvent})
   };
   render() {
     const { events, id } = this.props;
@@ -43,7 +44,7 @@ class EventsBox extends Component {
       <Div id={id}>
         {events.length !== 0 &&
           events.map((o, i) => {
-            // 이전날로 이동이가능 할까?
+            // 이벤트는 이전날로 이동이가능 할까?
             // let diffValue = moment(o.start).diff(moment(), 'day');
             return (
               <div
