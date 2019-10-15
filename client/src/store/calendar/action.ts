@@ -19,3 +19,9 @@ export const updateEvent = (data: DateData, callback) => {
 export const changeView = (data) => {
   return action(CalendarActionTypes.CHANGE_VIEW, data)
 }
+export const setDragData = (data) => {
+  return action(CalendarActionTypes.DRAG_SET_DATA, data)
+}
+export const initDragData = () => {
+  return action(CalendarActionTypes.INIT_DRAG_DATA)
+}

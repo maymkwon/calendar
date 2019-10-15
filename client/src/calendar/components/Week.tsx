@@ -3,6 +3,7 @@ import * as Moment from "moment";
 import { extendMoment } from "moment-range";
 import * as dateUtils from "../../utils/dates";
 import { DataKeyFormat } from "../../utils/constants";
+import { DateData } from "../../store/calendar/types";
 import { CView, CDayTime, CDayCol, CWeek, CDay } from "../../style/SCCalendar";
 import EventsBox from "./EventsBox";
 import Popup from "../../common/popup";
@@ -12,15 +13,18 @@ const timeSlot = dateUtils.getSlot();
 let weekdays = moment.weekdaysShort();
 
 interface Props {
-  onSelectDate:any
+  onSelectDate: any
   createEvent: any
   events: object
   deleteEvent: () => {}
-  updateEvent:() => {}
-  view:string
-  date: any
+  updateEvent: (DateData: DateData) => {}
+  setDragData: (object: object) => {}
+  view: string
+  date: any,
+  dragSetData: DateData
+  showToast: (object: object) => {}
+  initDragData: () => {}
 }
-
 class Week extends Component<Props> {
   onSelectDate = (e, date) => {
     e.preventDefault();
@@ -28,17 +32,59 @@ class Week extends Component<Props> {
     Popup.createEventPopup({ date, createFunc: this.props.createEvent });
   };
 
+  setDragData = (data) => {
+    this.props.setDragData(data)
+  }
+
   onDragOver = e => {
     e.preventDefault();
   };
 
   onDrop = (e, id) => {
+    const { events, dragSetData } = this.props
     const dataId = e.dataTransfer.getData("text");
     const dragEl = document.getElementById(dataId);
     const dropZone = document.getElementById(id);
-    dragEl.style.backgroundColor = "blue";
-    dropZone.appendChild(dragEl);
-    e.dataTransfer.clearData();
+    console.log(dropZone)
+
+    let splitId = id.split('_')
+    console.log(splitId)
+    let dropZoneDateTime = moment(splitId[0]).toDate()
+    // let dropZoneDate = moment(id).toDate()
+    let gap = dateUtils.getGap(dragSetData.start, dragSetData.end)
+    console.log('dropZoneDate', dropZoneDateTime)
+    
+    console.log(gap)
+    // let dragOriginStrtDate = moment(dragSetData.start).toDate()
+    // let dragOriginEndDate = moment(dragSetData.end).toDate()
+    let newStrtDate = dropZoneDateTime.setHours(splitId[1])
+    let newEndDate = moment(newStrtDate).add(gap, 'hour').valueOf()
+
+    // console.log('start', moment(newStrtDate).format('YYYY-MM-DD HH'))
+    console.log('end', newStrtDate)
+    console.log('end', newEndDate)
+    let newObj = {
+      ...dragSetData,
+      start: newStrtDate,
+      end: newEndDate,
+    }
+    console.log(events[id])
+    let dayEvent = events[id] || []
+    let newArr = [...dayEvent]
+    newArr.push(newObj)
+    let condition = dateUtils.getOverlap(newArr)
+    console.log(condition)
+    if (condition.overlap) {
+      this.props.showToast({ title: '중복 데이터', content: '' })
+      e.dataTransfer.clearData();
+      this.props.initDragData()
+      return;
+    } else {
+      dragEl.style.backgroundColor = "blue";
+      // dropZone.appendChild(dragEl);
+      this.props.updateEvent(newObj)
+      e.dataTransfer.clearData();
+    }
   };
 
   getStartEndData = () => {
@@ -57,7 +103,7 @@ class Week extends Component<Props> {
   };
 
   renderView = () => {
-    const { events, deleteEvent, updateEvent , view} = this.props;
+    const { events, deleteEvent, updateEvent, view, setDragData} = this.props;
     let weekdays = dateUtils.getSlot();
     let { startDay, endDay, start } = this.getStartEndData();
 
@@ -87,6 +133,7 @@ class Week extends Component<Props> {
                   events={events[datakey] || []}
                   deleteEvent={deleteEvent}
                   updateEvent={updateEvent}
+                  setDragData={this.setDragData}
                 />
               </CDayTime>
             );

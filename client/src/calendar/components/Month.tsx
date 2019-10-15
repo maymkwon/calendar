@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import * as Moment from "moment";
 import { CView, CWeek, CDay } from "../../style/SCCalendar";
 import * as dateUtils from "../../utils/dates";
+import { DateData} from "../../store/calendar/types";
 import { DataKeyFormat } from "../../utils/constants";
 import { extendMoment } from "moment-range";
 import cn from "classnames";
@@ -16,9 +17,13 @@ interface Props {
   createEvent: any
   events: object
   deleteEvent: () => {}
-  updateEvent: () => {}
+  updateEvent: (DateData: DateData) => {}
+  setDragData: (object:object) => {}
   view: string
-  date: any
+  date: any,
+  dragSetData: DateData
+  showToast:(object:object)=> {}
+  initDragData:()=> {}
 }
 
 class CalendarView extends Component<Props> {
@@ -28,68 +33,54 @@ class CalendarView extends Component<Props> {
     Popup.createEventPopup({ date, createFunc: this.props.createEvent });
   };
 
+  setDragData = (data) => {
+    console.log('setDragData',data)
+    this.props.setDragData(data)
+  }
+
   onDragOver = e => {
     e.preventDefault();
   };
 
   onDrop = (e, id) => {
-    const {events} = this.props
+    const {events, dragSetData} = this.props
     const dataId = e.dataTransfer.getData("text");
     const dragEl = document.getElementById(dataId);
-    const dropZone = document.getElementById(id);
-    dragEl.style.backgroundColor = "blue";
-    dropZone.appendChild(dragEl);
-    e.dataTransfer.clearData();
-
-    let originDataHour = moment(dataId *1).format('HH')
-    console.log(dataId, originDataHour);
-    let resultDate = moment(id+ ' ' + originDataHour).format('x')
-    console.log('바꿔야할 데이터',id, resultDate);
-    console.log(events[id])
-    let dayEvent = events[id]
-    let input = this.overlap(dayEvent)
+    // const dropZone = document.getElementById(id);
     
-    console.log(input)
+    let dropZoneDate = moment(id).toDate()
+    let dragOriginStrtDate = moment(dragSetData.start).toDate()
+    let dragOriginEndDate = moment(dragSetData.end).toDate()
+    let newStrtDate = dragOriginStrtDate.setDate(dropZoneDate.getDate())
+    let newEndDate = dragOriginEndDate.setDate(dropZoneDate.getDate())
+    let newObj = {
+      ...dragSetData,
+      start: newStrtDate,
+      end: newEndDate,
+    }
+    let dayEvent = events[id] || []
+    let newArr = [...dayEvent] 
+    newArr.push(newObj)
+    let condition = dateUtils.getOverlap(newArr)
+    
+    console.log('conditionconditionconditionconditioncondition', condition)
+    if (condition.overlap){
+      this.props.showToast({title:'중복 데이터', content:''})
+      e.dataTransfer.clearData();
+      this.props.initDragData()
+      return;
+    } else {
+      dragEl.style.backgroundColor = "blue";
+      // dropZone.appendChild(dragEl);
+      this.props.updateEvent(newObj)
+      e.dataTransfer.clearData();
+    }
   };
 
-  overlap = (dateArr) => {
-    
-    let sortedRange = dateArr.sort((prev, current) => {
-      let prevTime = prev.start
-      let currentTime = current.start
-
-      if(prevTime < currentTime){
-        return -1;
-      }
-      if(prevTime === currentTime){
-        return 0
-      }
-      return 1
-    })
-
-    let result = sortedRange.reduce((result,current, index, arr) => {
-      if(index === 0){ return result;}
-      let prev = arr[index -1]
-
-      let prevEnd = prev.end
-      let currentStart = current.start
-
-      let overlap = (prevEnd >currentStart)
-
-      if(overlap){
-        result.overlap = true
-
-        result.ranges.push({prev,current})
-      }
-      return result
-      
-    }, {overlap:false, ranges:[]})
-
-    return result
-  }
+  
 
   renderView = () => {
-    const { date, events, deleteEvent, updateEvent } = this.props;
+    const { date, events, deleteEvent, updateEvent, view} = this.props;
     const today = moment();
     let weekdays = moment.weekdaysShort();
     const start = dateUtils.getStartOfMonth(date);
@@ -124,10 +115,12 @@ class CalendarView extends Component<Props> {
               >
                 <strong className="dfacjcc">{day}</strong>
                 <EventsBox
+                  view={view}
                   id={datakey}
                   events={events[datakey] || []}
                   deleteEvent={deleteEvent}
                   updateEvent={updateEvent}
+                  setDragData={this.setDragData}
                 />
               </CDay>
             );

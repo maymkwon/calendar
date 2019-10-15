@@ -11,7 +11,7 @@ export const FORMATS = {
 };
 export const DataKeyFormat = {
   month: 'YYYYMMDD',
-  week: 'YYYYMMDDHH'
+  week: 'YYYYMMDD_HH'
 };
 
 export const StoryageKey = {

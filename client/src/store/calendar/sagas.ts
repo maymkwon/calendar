@@ -90,6 +90,9 @@ function* eventUpdate(action: ReturnType<typeof updateEvent>) {
       type: SystemActionType.SHOW_TOAST,
       payload: { title: "수정 완료", content: "" }
     });
+    yield put({
+      type: CalendarActionTypes.INIT_DRAG_DATA
+    });
 
     yield put({ type: CalendarActionTypes.GET_EVENT });
   } catch (e) {

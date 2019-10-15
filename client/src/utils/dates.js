@@ -104,3 +104,59 @@ export const getTimeOption = () => {
   })
   return options
 }
+export const getHourOption = () => {
+  let options = []
+
+  Array(24).fill(0).forEach((o,i) => {
+    let obj = {}
+    obj.label = `${i <10 ? '0' +i : i} : 00 `
+    obj.value = i
+    options.push(obj)
+  })
+  return options
+}
+
+export const getOverlap = (dateArr) => {
+    let defaultResult = { overlap: false, ranges: [] }
+    if (!dateArr || dateArr.length === 0) return defaultResult;
+    let sortedRange = dateArr.sort((prev, current) => {
+      let prevTime = prev.start
+      let currentTime = current.start
+
+      if (prevTime <= currentTime) {
+        return -1;
+      }
+      if (prevTime === currentTime) {
+        return 0
+      }
+      return 1
+    })
+
+    let result = sortedRange.reduce((result,current, index, arr) => {
+      if(index === 0){ return result;}
+      let prev = arr[index -1]
+
+      let prevEnd = prev.end
+      let prevStart = prev.start
+      let currentStart = current.start
+
+      let overlap = ((prevEnd-1) > currentStart)
+
+      if(overlap){
+        result.overlap = true
+
+        result.ranges.push({prev,current})
+      }
+      return result
+      
+    }, defaultResult)
+
+    return result
+  }
+
+  export const getGap = (date1, date2) => {
+    let start = moment(date1)
+    let end = moment(date2)
+    let diff = moment.duration(end.diff(start))
+    return diff.hours()
+  }

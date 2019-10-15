@@ -17,7 +17,9 @@ import {
   createEvent,
   deleteEvent,
   updateEvent,
-  changeView
+  changeView,
+  initDragData,
+setDragData
 } from "../store/calendar/action";
 import { DataKeyFormat } from "../utils/constants";
 
@@ -27,6 +29,7 @@ interface Props {
   date: MomentTypes;
   view: string;
   eventData: DateData[];
+  dragSetData: DateData;
 }
 
 interface PropsFromDispatch {
@@ -37,6 +40,8 @@ interface PropsFromDispatch {
   deleteEvent: typeof deleteEvent;
   updateEvent: typeof updateEvent;
   changeView: typeof changeView;
+  initDragData: typeof initDragData;
+  setDragData: typeof setDragData;
 }
 
 type AllProps = Props & PropsFromDispatch;
@@ -49,8 +54,6 @@ interface State {
 class Calendar extends Component<AllProps, State> {
   constructor(props: AllProps) {
     super(props);
-    let defaultView = localStorage.getItem(StoryageKey.DEFAULT_VIEW);
-    // let viewState= defaultView ? defaultView : componentView.MONTH;
     this.state = {
       view: "month",
       selectDate: moment()
@@ -109,10 +112,8 @@ class Calendar extends Component<AllProps, State> {
     const {
       date,
       eventData,
-      createEvent,
-      deleteEvent,
-      updateEvent,
-      view
+      view,
+      dragSetData,
     } = this.props;
     console.log("this.props.view", this.props);
     return (
@@ -130,10 +131,14 @@ class Calendar extends Component<AllProps, State> {
           view={view}
           onSelectDate={this.onSelectDate}
           events={eventData}
-          createEvent={createEvent}
-          deleteEvent={deleteEvent}
-          updateEvent={updateEvent}
-        />
+          dragSetData={dragSetData}
+          createEvent={this.props.createEvent}
+          deleteEvent={this.props.deleteEvent}
+          updateEvent={this.props.updateEvent}
+          showToast={this.props.showToast}
+          initDragData={this.props.initDragData}
+          setDragData={this.props.setDragData}
+              />
       </div>
     );
   }
@@ -185,7 +190,8 @@ const getroupByEvents = createSelector(
 const mapStateToProps = ({ calendar }: ApplicationState) => ({
   date: calendar.date,
   eventData: getroupByEvents(calendar.events, calendar.view),
-  view: calendar.view
+  view: calendar.view,
+  dragSetData: calendar.dragSetData
 });
 
 const mapDispatchToProps: PropsFromDispatch = {
@@ -195,7 +201,9 @@ const mapDispatchToProps: PropsFromDispatch = {
   deleteEvent,
   updateEvent,
   showToast,
-  changeView
+  changeView,
+  initDragData,
+  setDragData,
 };
 
 export default connect(

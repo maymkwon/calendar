@@ -34,13 +34,14 @@ const Div = styled.div.attrs({
 interface Props {
   events: DateData[]
   deleteEvent: () => {}
-  updateEvent: () => {}
+  updateEvent: (any) => void
+  setDragData: (any) => void
   view: string
   id:string
 }
 class EventsBox extends Component<Props> {
-  onDragStart = e => {
-    // this.draggedElement.dataset.id;
+  onDragStart = (e, event) => {
+    this.props.setDragData(event)
     let dataId = e.target.id;
     e.dataTransfer.setData("text/plain", dataId);
     e.currentTarget.style.backgroundColor = "red";
@@ -65,13 +66,12 @@ class EventsBox extends Component<Props> {
             let end = moment(o.end)
             let diff = moment.duration(end.diff(start))
             let calHour = diff.hours()
-            // console.log(calHourHeight)
             return (
               <div
                 id={o.start}
                 key={o.start}
                 draggable={true}
-                onDragStart={this.onDragStart}
+                onDragStart={(e) => this.onDragStart(e, o)}
                 className="event-list__item"
                 onClick={e => this.onClickEvent(e, o)}
                 style={{
@@ -79,10 +79,11 @@ class EventsBox extends Component<Props> {
                   top: `${i * 22}px`,
                   right: 10,
                   left: 10,
-                  height: `${view === 'week' && calHour * 50}px`
-                }}
-              >
-                {o.title}
+                  height: `${view === 'week' && calHour * 50}px`,
+                  zIndex: 999
+  }}
+>
+                {o.title} {start.hours()}시 ~{end.hours()}시
               </div>
             );
           })}

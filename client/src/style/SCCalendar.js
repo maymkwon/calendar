@@ -94,7 +94,7 @@ export const CDayTime = styled.div.attrs({ className: 'c-day-col__time' })`
   
   & + &,
   &:first-child {
-    border-top: 2px solid black;
+    border-top: 2px solid #eee;
   }
   &:last-child {
     border-bottom: 1px solid #eee;
