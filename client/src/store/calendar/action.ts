@@ -16,3 +16,6 @@ export const deleteEvent = (data: DeleteData, callback) => {
 export const updateEvent = (data: DateData, callback) => {
   return action(CalendarActionTypes.UPDATE_EVENT, data, callback)
 }
+export const changeView = (data) => {
+  return action(CalendarActionTypes.CHANGE_VIEW, data)
+}

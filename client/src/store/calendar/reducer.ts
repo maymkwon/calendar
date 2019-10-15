@@ -4,7 +4,8 @@ import { CalendarState, CalendarActionTypes} from './types'
 
 export const initalState: CalendarState= {
   date: moment(),
-  events: []
+  events: [],
+  view:'month'
 }
 
 const reducer: Reducer<CalendarState> = (state = initalState, action) => {
@@ -14,6 +15,9 @@ const reducer: Reducer<CalendarState> = (state = initalState, action) => {
     }
     case CalendarActionTypes.SUCCESS_EVENT:{
       return {...state, events:action.payload}
+    }
+    case CalendarActionTypes.CHANGE_VIEW:{
+      return {...state, view:action.payload}
     }
     default:{
       return state

@@ -9,7 +9,7 @@ const Toast: Record.Factory<ToastType> = Record({
 })
 
 export const InitalState: SystemState = fromJS({
-  queue: []
+  queue: [],
 })
 
 const pushToast = (state, toast) => {

@@ -90,7 +90,8 @@ export const CDayTime = styled.div.attrs({ className: 'c-day-col__time' })`
   position: relative;
   display: flex;
   flex-direction: column;
-  height: 120px;
+  height: ${({view}) => view === 'week' ? 50 : 120}px;
+  
   & + &,
   &:first-child {
     border-top: 2px solid black;

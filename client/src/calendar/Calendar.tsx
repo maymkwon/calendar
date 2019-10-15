@@ -4,17 +4,22 @@ import CalendarView from './components/CalendarView';
 import moment, { Moment as MomentTypes }from 'moment';
 import { componentView, StoryageKey } from '../utils/constants';
 import { connect, Provider } from 'react-redux';
-import { changeDate, getEventList, createEvent, deleteEvent, updateEvent } from '../store/calendar/action'
-import { showToast } from '../store/system/action'
 import { DateData } from '../store/calendar/types'
 import { ApplicationState } from '../store'
 import Popup from '../common/popup';
 import api from '../common/api'
+import {createSelector} from 'reselect'
+import groupBy from 'lodash/groupBy'
+import { showToast,  } from '../store/system/action'
+import { changeDate, getEventList, createEvent, deleteEvent, updateEvent, changeView} from '../store/calendar/action'
+import { DataKeyFormat } from '../utils/constants';
+
 import 'moment/locale/ko';
 
 
 interface Props {
-  date: MomentTypes,
+  date: MomentTypes
+  view: string
   eventData: DateData[]
 }
 
@@ -25,6 +30,8 @@ interface PropsFromDispatch {
   createEvent: typeof createEvent
   deleteEvent: typeof deleteEvent
   updateEvent: typeof updateEvent
+  changeView: typeof changeView
+
 }
 
 type AllProps = Props & PropsFromDispatch
@@ -91,17 +98,12 @@ class Calendar extends Component<AllProps, State> {
 
 
   onChangeView = (view) => {
-    this.setState(
-      { view }, () => {
-
-        localStorage.setItem(StoryageKey.DEFAULT_VIEW, view)
-      }
-    );
+    this.props.changeView(view)
   };
 
   render() {
-    const { date, eventData, createEvent, deleteEvent, updateEvent } = this.props;
-    const {  view } = this.state;
+    const { date, eventData, createEvent, deleteEvent, updateEvent, view } = this.props;
+    console.log('this.props.view',this.props)
     return (
       <div>
         <div style={{ height: 1 }} ref={this.Trigger} />
@@ -126,19 +128,63 @@ class Calendar extends Component<AllProps, State> {
   }
 }
 
+const sortedEvents = (state) => {
+  let sortedRange = state.sort((prev, current) => {
+    let prevTime = prev.start
+    let currentTime = current.start
 
-const mapStateToProps = ({ calendar }: ApplicationState) => ({
+    if (prevTime < currentTime) {
+      return -1;
+    }
+    if (prevTime === currentTime) {
+      return 0
+    }
+    return 1
+  })
+
+  return sortedRange
+}
+
+const sortedList = (state, props) => {
+  let sortedList = sortedEvents(state)
+  return sortedList
+
+}
+ 
+
+const groupList = (list,view) => {
+  let newEvents = groupBy(list, k => {
+  return moment(k.start).format(DataKeyFormat[view]);
+});
+  return newEvents
+}
+
+const getView = (state, props) => props
+
+const getroupByEvents = createSelector([sortedList, getView], (list, view) => {
+  switch(view){
+    case 'month':
+      return groupList(list,'month')
+    case 'week':
+      return groupList(list,'week')
+  }
+})
+
+
+const mapStateToProps = ({calendar}: ApplicationState) => ({
   date: calendar.date,
-  eventData: calendar.events
+  eventData: getroupByEvents(calendar.events, calendar.view),
+  view: calendar.view
 })
 
 const mapDispatchToProps: PropsFromDispatch = {
   changeDate,
-  showToast,
   getEventList,
   createEvent,
   deleteEvent,
-  updateEvent
+  updateEvent,
+  showToast,
+  changeView
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Calendar)

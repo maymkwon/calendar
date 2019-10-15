@@ -13,7 +13,10 @@ export enum CalendarActionTypes {
   SUCCESS_DELETE_EVENT = "@@calendar/SUCCESS_DELETE_EVENT",
 
   UPDATE_EVENT = "@@calendar/UPDATE_EVENT",
-  SUCCESS_UPDATE_EVENT = "@@calendar/SUCCESS_UPDATE_EVENT"
+  SUCCESS_UPDATE_EVENT = "@@calendar/SUCCESS_UPDATE_EVENT",
+
+  CHANGE_VIEW = '@@system/CHANGE_VIEW'
+
 }
 
 export interface DateData {
@@ -30,4 +33,5 @@ export interface DeleteData {
 export interface CalendarState {
   readonly date: MomentTypes;
   events: DateData[];
+  view:string
 }

@@ -47,7 +47,7 @@ class Week extends Component {
   };
 
   renderView = () => {
-    const { events, deleteEvent, updateEvent } = this.props;
+    const { events, deleteEvent, updateEvent , view} = this.props;
     let weekdays = dateUtils.getSlot();
     let { startDay, endDay, start } = this.getStartEndData();
 
@@ -64,14 +64,16 @@ class Week extends Component {
             let datakey = currentDay.format(DataKeyFormat.week);
             return (
               <CDayTime
+                view={view}
                 onClick={e => this.onSelectDate(e, currentDay)}
                 key={day + d.hour()}
                 onDragOver={this.onDragOver}
                 onDrop={e => this.onDrop(e, datakey)}
               >
-                <strong>{currentDay.format("D")}</strong>
+                {/* <strong>{currentDay.format("D")}</strong> */}
                 <EventsBox
                   id={datakey}
+                  view={view}
                   events={events[datakey] || []}
                   deleteEvent={deleteEvent}
                   updateEvent={updateEvent}

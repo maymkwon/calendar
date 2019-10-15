@@ -9,24 +9,25 @@ import groupBy from 'lodash/groupBy';
 const moment = extendMoment(Moment);
 
 class CalendarView extends Component {
-  convertData = () => {
-    const { view } = this.props;
-    const { events } = this.props;
-    let newEvents = groupBy(events, k => {
-      return moment(k.start).format(DataKeyFormat[view]);
-    });
-    return newEvents;
-  };
+  // convertData = () => {
+  //   const { view } = this.props;
+  //   const { events } = this.props;
+  //   let newEvents = groupBy(events, k => {
+  //     return moment(k.start).format(DataKeyFormat[view]);
+  //   });
+  //   return newEvents;
+  // };
 
   render() {
-    const { view, date } = this.props;
-    let convertEventData = this.convertData();
+    const { view, events } = this.props;
+    // let convertEventData = this.convertData();
+    // console.log('convertEventData',convertEventData)
     const Components = {
       [componentView.MONTH]: Month,
       [componentView.WEEK]: Week
     };
     const Calendar = Components[view];
-    return <Calendar {...this.props} events={convertEventData} />;
+    return <Calendar {...this.props} events={events} view={view} />;
   }
 }
 
