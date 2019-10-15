@@ -174,9 +174,9 @@ const getroupByEvents = createSelector(
   [sortedList, getView],
   (list, view) => {
     switch (view) {
-      case "month":
+      case componentView.MONTH:
         return groupList(list, "month");
-      case "week":
+      case componentView.WEEK:
         return groupList(list, "week");
     }
   }

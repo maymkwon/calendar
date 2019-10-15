@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import moment from "moment";
+import { DateData} from '../../store/calendar/types'
 import * as dateUtils from "../../utils/dates";
 import Popup from "../../common/popup";
 const Div = styled.div.attrs({
@@ -27,7 +28,17 @@ const Div = styled.div.attrs({
     margin-top: 2px;
   }
 `;
-class EventsBox extends Component {
+
+
+
+interface Props {
+  events: DateData[]
+  deleteEvent: () => {}
+  updateEvent: () => {}
+  view: string
+  id:string
+}
+class EventsBox extends Component<Props> {
   onDragStart = e => {
     // this.draggedElement.dataset.id;
     let dataId = e.target.id;

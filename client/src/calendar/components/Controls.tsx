@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 import { SCArrowBtn, SCBasicBtn } from '../../style/Buttons';
 import styled from 'styled-components';
-import moment from 'moment';
+import moment,{Moment as MomentType} from 'moment';
 import { componentView } from '../../utils/constants';
 import * as dateUtils from '../../utils/dates';
 import cn from 'classnames';
@@ -36,7 +36,24 @@ const SCWrap = styled.div.attrs({ className: 'c-control dfacjsb' })`
   }
 `;
 
-class Controls extends Component {
+
+interface Props{
+  date: MomentType
+  view:string
+  onChangeDate: (string:string) => void
+  onSelectDate: (MomentType: MomentType) => void
+  onChangeView: (string: string) => void
+}
+// interface PropsFromDispatch {
+//   changeDate: typeof changeDate;
+//   showToast: typeof showToast;
+//   getEventList: typeof getEventList;
+//   createEvent: typeof createEvent;
+//   deleteEvent: typeof deleteEvent;
+//   updateEvent: typeof updateEvent;
+//   changeView: typeof changeView;
+// }
+class Controls extends Component<Props> {
   render() {
     const { view, date, onChangeDate, onSelectDate, onChangeView } = this.props;
     const weekOfMonth = dateUtils.getWeekOfMonth(date);

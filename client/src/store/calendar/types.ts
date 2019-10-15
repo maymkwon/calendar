@@ -24,7 +24,6 @@ export interface DateData {
   title: string;
   start: any;
   end: any;
-  type: number;
 }
 export interface DeleteData {
   id: number;

@@ -11,7 +11,17 @@ const moment = extendMoment(Moment);
 const timeSlot = dateUtils.getSlot();
 let weekdays = moment.weekdaysShort();
 
-class Week extends Component {
+interface Props {
+  onSelectDate:any
+  createEvent: any
+  events: object
+  deleteEvent: () => {}
+  updateEvent:() => {}
+  view:string
+  date: any
+}
+
+class Week extends Component<Props> {
   onSelectDate = (e, date) => {
     e.preventDefault();
     this.props.onSelectDate(date);

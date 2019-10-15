@@ -11,7 +11,17 @@ import Popup from "../../common/popup";
 const moment = extendMoment(Moment);
 let weekdays = moment.weekdaysShort();
 
-class CalendarView extends Component {
+interface Props {
+  onSelectDate: any
+  createEvent: any
+  events: object
+  deleteEvent: () => {}
+  updateEvent: () => {}
+  view: string
+  date: any
+}
+
+class CalendarView extends Component<Props> {
   onSelectDate = (e, date) => {
     e.preventDefault();
     this.props.onSelectDate(date);
@@ -38,11 +48,12 @@ class CalendarView extends Component {
     console.log(events[id])
     let dayEvent = events[id]
     let input = this.overlap(dayEvent)
+    
     console.log(input)
   };
 
   overlap = (dateArr) => {
-
+    
     let sortedRange = dateArr.sort((prev, current) => {
       let prevTime = prev.start
       let currentTime = current.start
@@ -128,7 +139,6 @@ class CalendarView extends Component {
   };
 
   render() {
-    console.log(moment(1570546800000).format('YYYY-MM-DD HH'))
     return (
       <CView>
         <CWeek
