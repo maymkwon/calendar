@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import * as Moment from 'moment';
-import { extendMoment } from 'moment-range';
-import * as dateUtils from '../../utils/dates';
-import { DataKeyFormat } from '../../utils/constants';
-import { CView, CDayTime, CDayCol, CWeek, CDay } from '../../style/SCCalendar';
-import EventsBox from './EventsBox';
-import Popup from '../../common/popup';
+import React, { Component } from "react";
+import * as Moment from "moment";
+import { extendMoment } from "moment-range";
+import * as dateUtils from "../../utils/dates";
+import { DataKeyFormat } from "../../utils/constants";
+import { CView, CDayTime, CDayCol, CWeek, CDay } from "../../style/SCCalendar";
+import EventsBox from "./EventsBox";
+import Popup from "../../common/popup";
 
 const moment = extendMoment(Moment);
 const timeSlot = dateUtils.getSlot();
@@ -13,9 +13,9 @@ let weekdays = moment.weekdaysShort();
 
 class Week extends Component {
   onSelectDate = (e, date) => {
-    e.preventDefault()
+    e.preventDefault();
     this.props.onSelectDate(date);
-    Popup.createEventPopup({date, createFunc:this.props.createEvent})
+    Popup.createEventPopup({ date, createFunc: this.props.createEvent });
   };
 
   onDragOver = e => {
@@ -23,10 +23,10 @@ class Week extends Component {
   };
 
   onDrop = (e, id) => {
-    const dataId = e.dataTransfer.getData('text');
+    const dataId = e.dataTransfer.getData("text");
     const dragEl = document.getElementById(dataId);
     const dropZone = document.getElementById(id);
-    dragEl.style.backgroundColor = 'blue';
+    dragEl.style.backgroundColor = "blue";
     dropZone.appendChild(dragEl);
     e.dataTransfer.clearData();
   };
@@ -47,7 +47,7 @@ class Week extends Component {
   };
 
   renderView = () => {
-    const { events, deleteEvent ,updateEvent} = this.props;
+    const { events, deleteEvent, updateEvent } = this.props;
     let weekdays = dateUtils.getSlot();
     let { startDay, endDay, start } = this.getStartEndData();
 
@@ -59,7 +59,7 @@ class Week extends Component {
           {weekdays.map((d, i) => {
             let currentDay = moment(start)
               .day(day)
-              .set('hour', d.hour());
+              .set("hour", d.hour());
 
             let datakey = currentDay.format(DataKeyFormat.week);
             return (
@@ -67,9 +67,15 @@ class Week extends Component {
                 onClick={e => this.onSelectDate(e, currentDay)}
                 key={day + d.hour()}
                 onDragOver={this.onDragOver}
-                onDrop={e => this.onDrop(e, datakey)}>
-                <strong>{currentDay.format('D')}</strong>
-                <EventsBox id={datakey} events={events[datakey] || []} deleteEvent={deleteEvent} updateEvent={updateEvent}/>
+                onDrop={e => this.onDrop(e, datakey)}
+              >
+                <strong>{currentDay.format("D")}</strong>
+                <EventsBox
+                  id={datakey}
+                  events={events[datakey] || []}
+                  deleteEvent={deleteEvent}
+                  updateEvent={updateEvent}
+                />
               </CDayTime>
             );
           })}
@@ -85,7 +91,8 @@ class Week extends Component {
         <CWeek
           id="view-header"
           className="c-view__header c-view__header--month"
-          style={{ paddingLeft: 150 }}>
+          style={{ paddingLeft: 150 }}
+        >
           {weekdays.map((dayText, index) => {
             return (
               <CDay className="c-day" key={index}>
@@ -101,8 +108,9 @@ class Week extends Component {
                 <CDayTime
                   className="aifs timeslot-item"
                   key={e}
-                  length={timeSlot.length}>
-                  <strong>{e.format('A h 시')}</strong>
+                  length={timeSlot.length}
+                >
+                  <strong>{e.format("A h 시")}</strong>
                 </CDayTime>
               );
             })}

@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
-import moment from 'moment';
-import * as dateUtils from '../../utils/dates';
-import Popup from '../../common/popup';
+import React, { Component } from "react";
+import styled from "styled-components";
+import moment from "moment";
+import * as dateUtils from "../../utils/dates";
+import Popup from "../../common/popup";
 const Div = styled.div.attrs({
-  className: 'event-list'
+  className: "event-list"
 })`
   position: relative;
   &.event-list {
@@ -31,12 +31,16 @@ class EventsBox extends Component {
   onDragStart = e => {
     // this.draggedElement.dataset.id;
     let dataId = e.target.id;
-    e.dataTransfer.setData('text/plain', dataId);
-    e.currentTarget.style.backgroundColor = 'red';
+    e.dataTransfer.setData("text/plain", dataId);
+    e.currentTarget.style.backgroundColor = "red";
   };
   onClickEvent = (e, event) => {
     e.stopPropagation();
-    Popup.detailEventPopup({event, updateEvent: this.props.updateEvent,deleteEvent:this.props.deleteEvent})
+    Popup.detailEventPopup({
+      event,
+      updateEvent: this.props.updateEvent,
+      deleteEvent: this.props.deleteEvent
+    });
   };
   render() {
     const { events, id } = this.props;
@@ -53,13 +57,14 @@ class EventsBox extends Component {
                 draggable={true}
                 onDragStart={this.onDragStart}
                 className="event-list__item"
-                onClick={(e) => this.onClickEvent(e, o)}
+                onClick={e => this.onClickEvent(e, o)}
                 style={{
-                  position: 'absolute',
+                  position: "absolute",
                   top: `${i * 22}px`,
                   right: 10,
                   left: 10
-                }}>
+                }}
+              >
                 {o.title}
               </div>
             );
