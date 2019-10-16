@@ -8,13 +8,13 @@
 
 ## 실행 방법
 
-*Client*
+**Client**
 1. `cd ./client` 클라이언트 폴더로 이동
 2. `npm i` 커맨드 입력 
 3. `npm start`
 4. `localhost:3000` 접속
 
-*Server*
+**Server**
 
 데이터 베이스는 redis 를 사용하였습니다.
 실행하려는 컴퓨터에 redis가 설치 되어 있어야 합니다.
@@ -55,14 +55,44 @@ wget 대신 [redis 공식 페이지](https://redis.io/topics/quickstart) 에서 
 
 
 ## 프로젝트 사용 라이브러리
-client
 
-server
+**Client**
+
+* typescript
+* redux
+* immutable
+* typesafe-actions
+* redux-saga
+* react-redux
+* reselect
+* react-router
+
+*통신*
+* axios
+
+*캘린더 관련*
+
+* date-arithmetic
+* moment
+* moment-range
+* react-datepicker
+
+*스타일 관련*
+
+* styled-compoent
+
+기타
+* react-select
+
+**Server**
+
+* cors
+* express
+* nodemon
+* redis
+
 
 ***
-
-
-
 
 ## 폴더구조
 
