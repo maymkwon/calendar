@@ -66,31 +66,41 @@ server
 
 ## 폴더구조
 
+```
 .src
 +-- calendar
 |   +-- components    : 캘린더에 필요한 컴포넌트
 |   +-- Calendar.tsx  : 캘린더 컨테이너
+|
 +-- common
 |   +-- api           : api 통신을 위한 axios 설정 폴더
 |   +-- layerpopup    : 팝업 생성/설정 관련
 |   +-- popup         : 팝업 컴포넌트
 |   +-- toast         : 토스트 팝업 관련
+|   
 +-- route             : 라우팅 컴포넌트
+|
 +-- services          : 서비스 관련 
+|
 +-- store             : 액션 / 리듀서 / 사가 / 타입 관련
+|   |
 |   +-- calendar
 |   |   +-- action    : 액션 함수
 |   |   +-- reducer   : 리듀서
 |   |   +-- sagas     : 사가 함수
 |   |   +-- types     : 타입정의
+|   |
 |   +-- system        
 |   |   +-- action    : 액션 함수
 |   |   +-- reducer   : 리듀서
 |   |   +-- sagas     : 사가 함수
 |   |   +-- types     : 타입정의
+|   |
 |   +-- index.js      : 스토어 인덱스 (combineReducer, rootSaga)
+|
 +-- style             : 전체 스타일
 +-- utils             : 상수 / 데이트 관련 함수
+```
 
 ***
 
