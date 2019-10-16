@@ -1,16 +1,16 @@
-import React, { Component } from "react";
-import Controls from "./components/Controls";
-import CalendarView from "./components/CalendarView";
-import moment, { Moment as MomentTypes } from "moment";
-import { componentView, StoryageKey } from "../utils/constants";
-import { connect, Provider } from "react-redux";
-import { DateData } from "../store/calendar/types";
-import { ApplicationState } from "../store";
-import Popup from "../common/popup";
-import api from "../common/api";
-import { createSelector } from "reselect";
-import groupBy from "lodash/groupBy";
-import { showToast } from "../store/system/action";
+import React, { Component } from 'react';
+import Controls from './components/Controls';
+import CalendarView from './components/CalendarView';
+import moment, { Moment as MomentTypes } from 'moment';
+import { componentView, StoryageKey } from '../utils/constants';
+import { connect, Provider } from 'react-redux';
+import { DateData } from '../store/calendar/types';
+import { ApplicationState } from '../store';
+import Popup from '../common/popup';
+import api from '../common/api';
+import { createSelector } from 'reselect';
+import groupBy from 'lodash/groupBy';
+import { showToast } from '../store/system/action';
 import {
   changeDate,
   getEventList,
@@ -20,14 +20,14 @@ import {
   changeView,
   initDragData,
   setDragData
-} from "../store/calendar/action";
-import { DataKeyFormat } from "../utils/constants";
+} from '../store/calendar/action';
+import { DataKeyFormat } from '../utils/constants';
 
-import "moment/locale/ko";
+import 'moment/locale/ko';
 
 interface Props {
   date: MomentTypes;
-  view: string;
+  view: 'month' | 'week';
   eventData: DateData[];
   dragSetData: DateData;
 }
@@ -47,7 +47,6 @@ interface PropsFromDispatch {
 type AllProps = Props & PropsFromDispatch;
 
 interface State {
-  view: "month" | "week";
   selectDate: MomentTypes;
 }
 
@@ -55,15 +54,13 @@ class Calendar extends Component<AllProps, State> {
   constructor(props: AllProps) {
     super(props);
     this.state = {
-      view: "month",
       selectDate: moment()
     };
   }
   Trigger = React.createRef<HTMLDivElement>();
 
   onChangeDate = (direction: string) => {
-    const { view } = this.state;
-    const { date, changeDate } = this.props;
+    const { date, changeDate, view } = this.props;
     let prevNext = () => {
       return {
         prev: () => changeDate({ date: date.clone().subtract(1, view) }),
@@ -86,14 +83,14 @@ class Calendar extends Component<AllProps, State> {
 
   componentDidMount() {
     let triggerEl = this.Trigger.current;
-    let viewHeaderEl = document.querySelector("#view-header");
+    let viewHeaderEl = document.querySelector('#view-header');
     if (viewHeaderEl) {
       let observer = new IntersectionObserver(
         ent => {
           if (ent[0].intersectionRatio === 0) {
-            viewHeaderEl.classList.add("sticky");
+            viewHeaderEl.classList.add('sticky');
           } else if (ent[0].intersectionRatio === 1) {
-            viewHeaderEl.classList.remove("sticky");
+            viewHeaderEl.classList.remove('sticky');
           }
         },
         { threshold: [0, 1] }
@@ -174,9 +171,9 @@ const getroupByEvents = createSelector(
   (list, view) => {
     switch (view) {
       case componentView.MONTH:
-        return groupList(list, "month");
+        return groupList(list, 'month');
       case componentView.WEEK:
-        return groupList(list, "week");
+        return groupList(list, 'week');
     }
   }
 );

@@ -1,12 +1,12 @@
-import React, { Component } from "react";
-import * as Moment from "moment";
-import { extendMoment } from "moment-range";
-import * as dateUtils from "../../utils/dates";
-import { DataKeyFormat } from "../../utils/constants";
-import { DateData } from "../../store/calendar/types";
-import { CView, CDayTime, CDayCol, CWeek, CDay } from "../../style/SCCalendar";
-import EventsBox from "./EventsBox";
-import Popup from "../../common/popup";
+import React, { Component } from 'react';
+import * as Moment from 'moment';
+import { extendMoment } from 'moment-range';
+import * as dateUtils from '../../utils/dates';
+import { DataKeyFormat } from '../../utils/constants';
+import { DateData } from '../../store/calendar/types';
+import { CView, CDayTime, CDayCol, CWeek, CDay } from '../../style/SCCalendar';
+import EventsBox from './EventsBox';
+import Popup from '../../common/popup';
 
 const moment = extendMoment(Moment);
 const timeSlot = dateUtils.getSlot();
@@ -41,18 +41,15 @@ class Week extends Component<Props> {
   };
 
   onDrop = (e, id) => {
-    const { events, dragSetData } = this.props;
-    const dataId = e.dataTransfer.getData("text");
-    const dragEl = document.getElementById(dataId);
-    const dropZone = document.getElementById(id);
+    const { dragSetData } = this.props;
 
-    let splitId = id.split("_");
+    let splitId = id.split('_');
     let dropZoneDateTime = moment(splitId[0]).toDate();
     let gap = dateUtils.getGap(dragSetData.start, dragSetData.end);
 
     let newStrtDate = dropZoneDateTime.setHours(splitId[1]);
     let newEndDate = moment(newStrtDate)
-      .add(gap, "hour")
+      .add(gap, 'hour')
       .valueOf();
 
     let newObj = {
@@ -60,21 +57,8 @@ class Week extends Component<Props> {
       start: newStrtDate,
       end: newEndDate
     };
-    let dayEvent = events[id] || [];
-    let newArr = [...dayEvent];
-    newArr.push(newObj);
-    let condition = dateUtils.getOverlap(newArr);
-    if (condition.overlap) {
-      this.props.showToast({ title: "중복 데이터", content: "" });
-      e.dataTransfer.clearData();
-      this.props.initDragData();
-      return;
-    } else {
-      dragEl.style.backgroundColor = "blue";
-      // dropZone.appendChild(dragEl);
-      this.props.updateEvent(newObj);
-      e.dataTransfer.clearData();
-    }
+    this.props.updateEvent(newObj);
+    e.dataTransfer.clearData();
   };
 
   getStartEndData = () => {
@@ -105,7 +89,7 @@ class Week extends Component<Props> {
           {weekdays.map((d, i) => {
             let currentDay = moment(start)
               .day(day)
-              .set("hour", d.hour());
+              .set('hour', d.hour());
 
             let datakey = currentDay.format(DataKeyFormat.week);
             return (
@@ -159,7 +143,7 @@ class Week extends Component<Props> {
                   key={e}
                   length={timeSlot.length}
                 >
-                  <strong>{e.format("A h 시")}</strong>
+                  <strong>{e.format('A h 시')}</strong>
                 </CDayTime>
               );
             })}

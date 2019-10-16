@@ -1,15 +1,15 @@
-import React from "react";
-import { Store } from "redux";
-import { History } from "history";
-import { ApplicationState } from "./store";
-import { connect, Provider } from "react-redux";
-import { changeDate } from "./store/calendar/action";
-import Calendar from "./calendar/Calendar";
-import { ConnectedRouter } from "connected-react-router";
-import Routes from "./routes";
-import ToastContainer from "./common/ToastContainer";
-import { LayerPopupContainer } from "./common/layerpopup";
-import "./App.css";
+import React from 'react';
+import { Store } from 'redux';
+import { History } from 'history';
+import { ApplicationState } from './store';
+import { connect, Provider } from 'react-redux';
+import { changeDate } from './store/calendar/action';
+import Calendar from './calendar/Calendar';
+import { ConnectedRouter } from 'connected-react-router';
+import Routes from './routes';
+import ToastContainer from './common/toast/ToastContainer';
+import { LayerPopupContainer } from './common/layerpopup';
+import './App.css';
 
 type AppProps = {
   store: Store<ApplicationState>;

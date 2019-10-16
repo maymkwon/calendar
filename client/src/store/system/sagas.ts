@@ -1,5 +1,5 @@
-import { SystemActionType } from "./types";
-import { all, put, takeEvery, delay, fork } from "redux-saga/effects";
+import { SystemActionType } from './types';
+import { all, put, takeEvery, delay, fork } from 'redux-saga/effects';
 
 function* toastQueue(action) {
   yield put({

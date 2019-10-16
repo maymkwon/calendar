@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
-import { SystemState, ToastType } from "../store/system/types";
+import { SystemState, ToastType } from "../../store/system/types";
 import TransitionGroup from "react-transition-group/TransitionGroup";
 import ToastMessage from "./ToastMessage";
 import FadeIn from "./FadeIn";
@@ -11,7 +11,7 @@ const Div = styled.div`
   bottom: 50px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 9999;
+  z-index: 99999;
 `;
 
 class ToastContainer extends Component {

@@ -1,13 +1,13 @@
-import React, { Component } from "react";
-import * as Moment from "moment";
-import { CView, CWeek, CDay } from "../../style/SCCalendar";
-import * as dateUtils from "../../utils/dates";
-import { DateData } from "../../store/calendar/types";
-import { DataKeyFormat } from "../../utils/constants";
-import { extendMoment } from "moment-range";
-import cn from "classnames";
-import EventsBox from "./EventsBox";
-import Popup from "../../common/popup";
+import React, { Component } from 'react';
+import * as Moment from 'moment';
+import { CView, CWeek, CDay } from '../../style/SCCalendar';
+import * as dateUtils from '../../utils/dates';
+import { DateData } from '../../store/calendar/types';
+import { DataKeyFormat } from '../../utils/constants';
+import { extendMoment } from 'moment-range';
+import cn from 'classnames';
+import EventsBox from './EventsBox';
+import Popup from '../../common/popup';
 
 const moment = extendMoment(Moment);
 let weekdays = moment.weekdaysShort();
@@ -42,10 +42,9 @@ class CalendarView extends Component<Props> {
   };
 
   onDrop = (e, id) => {
-    const { events, dragSetData } = this.props;
-    const dataId = e.dataTransfer.getData("text");
+    const { dragSetData } = this.props;
+    const dataId = e.dataTransfer.getData('text');
     const dragEl = document.getElementById(dataId);
-    // const dropZone = document.getElementById(id);
 
     let dropZoneDate = moment(id).toDate();
     let dragOriginStrtDate = moment(dragSetData.start).toDate();
@@ -57,22 +56,11 @@ class CalendarView extends Component<Props> {
       start: newStrtDate,
       end: newEndDate
     };
-    let dayEvent = events[id] || [];
-    let newArr = [...dayEvent];
-    newArr.push(newObj);
-    let condition = dateUtils.getOverlap(newArr);
 
-    if (condition.overlap) {
-      this.props.showToast({ title: "중복 데이터", content: "" });
-      e.dataTransfer.clearData();
-      this.props.initDragData();
-      return;
-    } else {
-      dragEl.style.backgroundColor = "blue";
-      // dropZone.appendChild(dragEl);
-      this.props.updateEvent(newObj);
-      e.dataTransfer.clearData();
-    }
+    dragEl.style.backgroundColor = 'blue';
+    // dropZone.appendChild(dragEl);
+    this.props.updateEvent(newObj);
+    e.dataTransfer.clearData();
   };
 
   renderView = () => {
@@ -92,18 +80,18 @@ class CalendarView extends Component<Props> {
             let currentDay = moment(start)
               .week(week)
               .day(i - 1);
-            let isToday = dateUtils.isSame(today, currentDay, "day");
-            let isSelected = dateUtils.isSame(date, currentDay, "day");
-            let isCurrentMonth = dateUtils.isSame(date, currentDay, "month");
-            let day = currentDay.format("D");
+            let isToday = dateUtils.isSame(today, currentDay, 'day');
+            let isSelected = dateUtils.isSame(date, currentDay, 'day');
+            let isCurrentMonth = dateUtils.isSame(date, currentDay, 'month');
+            let day = currentDay.format('D');
             let datakey = currentDay.format(DataKeyFormat.month);
             return (
               <CDay
                 key={datakey}
-                className={cn("c-day", {
+                className={cn('c-day', {
                   selected: isSelected,
                   today: isToday,
-                  "c-day__prevnext-day": !isCurrentMonth
+                  'c-day__prevnext-day': !isCurrentMonth
                 })}
                 onClick={e => this.onSelectDate(e, currentDay)}
                 onDragOver={this.onDragOver}

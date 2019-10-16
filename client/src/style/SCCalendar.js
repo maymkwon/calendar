@@ -28,7 +28,6 @@ export const CWeek = styled.div.attrs({ className: 'c-week' })`
     top: 51px;
     background: #fff;
     z-index: 999;
-    
   }
 
   & + & {
@@ -47,6 +46,7 @@ export const CDay = styled.div.attrs({ className: 'c-day' })`
 
   &.c-day {
     &__prevnext-day {
+      background-color: #ddd;
       opacity: 0.7;
     }
     &.today strong {
@@ -54,7 +54,7 @@ export const CDay = styled.div.attrs({ className: 'c-day' })`
       color: #fff;
     }
     &.selected {
-      background-color: #ddd;
+      border: 1px solid red;
     }
   }
   strong {
@@ -90,8 +90,8 @@ export const CDayTime = styled.div.attrs({ className: 'c-day-col__time' })`
   position: relative;
   display: flex;
   flex-direction: column;
-  height: ${({view}) => view === 'week' ? 50 : 120}px;
-  
+  height: ${({ view }) => (view === 'week' ? 50 : 120)}px;
+
   & + &,
   &:first-child {
     border-top: 2px solid #eee;
