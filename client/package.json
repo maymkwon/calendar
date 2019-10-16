@@ -32,6 +32,7 @@
     "dotenv": "6.2.0",
     "dotenv-expand": "5.1.0",
     "eslint": "^6.1.0",
+    "eslint-config-prettier": "^6.4.0",
     "eslint-config-react-app": "^5.0.2",
     "eslint-loader": "3.0.2",
     "eslint-plugin-flowtype": "3.13.0",
@@ -164,5 +165,8 @@
     "presets": [
       "react-app"
     ]
+  },
+  "devDependencies": {
+    "tslint-config-prettier": "^1.18.0"
   }
 }

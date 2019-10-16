@@ -9,11 +9,18 @@
   "editor.multiCursorModifier": "ctrlCmd",
   "editor.formatOnPaste": true,
   "explorer.confirmDragAndDrop": false,
-  "emmet.syntaxProfiles": {
-    "javascript": "jsx"
-  },
+
   "editor.formatOnSave": true,
   "javascript.format.enable": false,
   "prettier.eslintIntegration": true,
-  "prettier.singleQuote": true
+  "prettier.singleQuote": true,
+  "[javascript]": {
+    "editor.formatOnSave": true
+  },
+  "[typescriptreact]": {
+    "editor.formatOnSave": true
+  },
+  "[typescript]": {
+    "editor.formatOnSave": true
+  }
 }
