@@ -13,7 +13,7 @@ const DefaultButton = styled.button`
   -webkit-font-smoothing: inherit;
   -moz-oxs-font-smoothing: inherit;
   -webkit-appearance: none;
-  outline:none;
+  outline: none;
 `;
 
 export const SCArrowBtn = styled(DefaultButton)`
@@ -33,19 +33,22 @@ export const SCBasicBtn = styled(DefaultButton).attrs({
   border: 1px solid #eee;
   padding: 7px 12px;
   text-align: center;
-  
+
   &:hover:not(:disabled) {
     background-color: #eee;
   }
   &.red {
-    background-color:#ff2659;
+    background-color: #ff2659;
     color: #fff;
+    &:hover {
+      background-color: rgba(255, 38, 89, 0.7);
+    }
   }
   &.green {
-    background-color:#00ad48;
+    background-color: #00ad48;
     color: #fff;
-    &:hover{
-      background-color:rgba(0,173,72, 0.7);
+    &:hover {
+      background-color: rgba(0, 173, 72, 0.7);
     }
   }
 `;

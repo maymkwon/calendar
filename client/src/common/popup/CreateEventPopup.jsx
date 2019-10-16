@@ -2,14 +2,13 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import DatePicker from "react-datepicker";
 import moment from "moment";
-import styled from "styled-components";
-import "react-datepicker/dist/react-datepicker.css";
 import { SCBasicBtn } from "../../style/Buttons";
 import Popup from ".";
 import { SCPopupContainer } from "../../style/SCPopup";
 import { SCInput } from "../../style/SCInputStyle";
 import Select from "react-select";
 import * as dateUtils from "../../utils/dates";
+import "react-datepicker/dist/react-datepicker.css";
 
 const timeOption = dateUtils.getHourOption();
 
@@ -74,7 +73,6 @@ class CreateEventPopup extends Component {
     return (
       <SCPopupContainer>
         <div className="pop-header">
-          {/* <h1>일정 등록</h1> */}
           <SCInput
             className="header"
             type="text"

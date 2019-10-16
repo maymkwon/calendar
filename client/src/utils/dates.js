@@ -1,7 +1,7 @@
-import moment from "moment";
-import * as dates from "date-arithmetic";
-import { FORMATS } from "./constants";
-export { startOf, endOf, gt } from "date-arithmetic";
+import moment from 'moment';
+import * as dates from 'date-arithmetic';
+import { FORMATS } from './constants';
+export { startOf, endOf, gt } from 'date-arithmetic';
 
 const MILLI = {
   seconds: 1000,
@@ -19,7 +19,7 @@ function getEndOf(date, unit) {
 }
 
 export function diff(date1, date2, unit) {
-  if (!unit || unit === "milliseconds") return Math.abs(+date1 - +date2);
+  if (!unit || unit === 'milliseconds') return Math.abs(+date1 - +date2);
   return Math.round(
     Math.abs(
       +dates.startOf(date1, unit) / MILLI[unit] -
@@ -31,31 +31,31 @@ export function cloneDate(date) {
   return date.clone();
 }
 export function getStartOfDay(date) {
-  return getStartOf(date, "day");
+  return getStartOf(date, 'day');
 }
 
 export function getStartOfWeek(date) {
   let newDate = cloneDate(date);
-  return getStartOf(newDate, "week");
+  return getStartOf(newDate, 'week');
 }
 export function getStartOfMonth(date) {
   let newDate = cloneDate(date);
-  return getStartOf(newDate, "month");
+  return getStartOf(newDate, 'month');
 }
 
 export function getStartOfDate(date) {
   let newDate = cloneDate(date);
-  return getStartOf(newDate, "date");
+  return getStartOf(newDate, 'date');
 }
 
 export function getEndOfWeek(date) {
   let newDate = cloneDate(date);
-  return getEndOf(newDate, "week");
+  return getEndOf(newDate, 'week');
 }
 
 export function getEndOfMonth(date) {
   let newDate = cloneDate(date);
-  return getEndOf(newDate, "month");
+  return getEndOf(newDate, 'month');
 }
 export function getWeekOfMonth(date) {
   let newDate = cloneDate(date);
@@ -73,15 +73,15 @@ export function isSame(date1, date2, unit) {
 }
 
 export function isGt(date1, date2, unit) {
-  return dates.gt(date1, date2, ["day"]);
+  return dates.gt(date1, date2, ['day']);
 }
 
 export function getCurrentDate(date, week, add) {
   let newDate = cloneDate(date);
   return newDate
     .week(week)
-    .startOf("week")
-    .add(add, "day");
+    .startOf('week')
+    .add(add, 'day');
 }
 
 export const getSlot = () => {
@@ -98,8 +98,8 @@ export const getTimeOption = () => {
   let options = [];
   getSlot().forEach((o, i) => {
     let obj = {};
-    obj.title = o.format("A h 시");
-    obj.value = o.format("HH:00");
+    obj.title = o.format('A h 시');
+    obj.value = o.format('HH:00');
     options.push(obj);
   });
   return options;
@@ -111,7 +111,7 @@ export const getHourOption = () => {
     .fill(0)
     .forEach((o, i) => {
       let obj = {};
-      obj.label = `${i < 10 ? "0" + i : i} : 00 `;
+      obj.label = `${i < 10 ? '0' + i : i} : 00 `;
       obj.value = i;
       options.push(obj);
     });
@@ -141,7 +141,6 @@ export const getOverlap = dateArr => {
     let prev = arr[index - 1];
 
     let prevEnd = prev.end;
-    let prevStart = prev.start;
     let currentStart = current.start;
 
     let overlap = prevEnd - 1 > currentStart;

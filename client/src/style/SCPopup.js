@@ -1,6 +1,4 @@
-import styled from 'styled-components'
-
-
+import styled from 'styled-components';
 
 export const ModalWrapper = styled.div`
   z-index: ${({ layerkey }) => layerkey};
@@ -16,9 +14,9 @@ export const ModalWrapper = styled.div`
   .modal-content {
     position: absolute;
     left: 50%;
-    width: ${({ popupWidth }) => (popupWidth ? `${popupWidth}px` : "540px")};
+    width: ${({ popupWidth }) => (popupWidth ? `${popupWidth}px` : '540px')};
     margin-left: ${({ popupWidth }) =>
-      popupWidth ? `-${popupWidth / 2}px` : "-270px"};
+      popupWidth ? `-${popupWidth / 2}px` : '-270px'};
     height: auto;
     background-color: #fff;
     transform-origin: center center;
@@ -74,45 +72,42 @@ export const SCPopupContainer = styled.div`
   margin: 0 20px;
   padding: 25px 0;
   h1 {
-    border-bottom: 1px solid #eee;
     margin: 0;
-    margin-bottom: 20px;
-    padding-bottom: 15px;
   }
   .react-datepicker__input-container > input {
     padding: 10px;
     font-size: 14px;
   }
-  .pop-header{
+  .pop-header {
     border-bottom: 1px solid #eee;
     margin-bottom: 20px;
     padding-bottom: 15px;
   }
-  .pop-select{
-    display:flex;
-    &.date{
-      display:block;
+  .pop-select {
+    display: flex;
+    &.date {
+      display: block;
     }
     margin-top: 20px;
-    & > span{
-      display:block
+    & > span {
+      display: block;
     }
-    & > div{
-      flex:1
+    & > div {
+      flex: 1;
     }
     & > div + div {
-      margin-left:15px;
+      margin-left: 15px;
     }
-    .label{
-      display:block;
+    .label {
+      display: block;
     }
   }
 
   .btn-box {
     margin-top: 20px;
-    text-align:right;
+    text-align: right;
     button {
-      width: 80px;
+      width: 100px;
     }
     button + button {
       margin-left: 10px;

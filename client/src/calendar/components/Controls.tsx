@@ -1,13 +1,13 @@
-import React, { Component } from "react";
-import { MdChevronLeft, MdChevronRight } from "react-icons/md";
-import { SCArrowBtn, SCBasicBtn } from "../../style/Buttons";
-import styled from "styled-components";
-import moment, { Moment as MomentType } from "moment";
-import { componentView } from "../../utils/constants";
-import * as dateUtils from "../../utils/dates";
-import cn from "classnames";
+import React, { Component } from 'react';
+import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
+import { SCArrowBtn, SCBasicBtn } from '../../style/Buttons';
+import styled from 'styled-components';
+import moment, { Moment as MomentType } from 'moment';
+import { componentView } from '../../utils/constants';
+import * as dateUtils from '../../utils/dates';
+import cn from 'classnames';
 
-const SCWrap = styled.div.attrs({ className: "c-control dfacjsb" })`
+const SCWrap = styled.div.attrs({ className: 'c-control dfacjsb' })`
   padding: 0 20px;
   border-bottom: 1px solid #eee;
   position: sticky;
@@ -43,15 +43,7 @@ interface Props {
   onSelectDate: (MomentType: MomentType) => void;
   onChangeView: (string: string) => void;
 }
-// interface PropsFromDispatch {
-//   changeDate: typeof changeDate;
-//   showToast: typeof showToast;
-//   getEventList: typeof getEventList;
-//   createEvent: typeof createEvent;
-//   deleteEvent: typeof deleteEvent;
-//   updateEvent: typeof updateEvent;
-//   changeView: typeof changeView;
-// }
+
 class Controls extends Component<Props> {
   render() {
     const { view, date, onChangeDate, onSelectDate, onChangeView } = this.props;
@@ -62,14 +54,14 @@ class Controls extends Component<Props> {
           <SCArrowBtn
             className="dfacjcc"
             size={50}
-            onClick={() => onChangeDate("prev")}
+            onClick={() => onChangeDate('prev')}
           >
             <MdChevronLeft size={30} />
           </SCArrowBtn>
           <SCArrowBtn
             className="dfacjcc"
             size={50}
-            onClick={() => onChangeDate("next")}
+            onClick={() => onChangeDate('next')}
           >
             <MdChevronRight size={30} />
           </SCArrowBtn>
@@ -78,7 +70,7 @@ class Controls extends Component<Props> {
             role="button"
             onClick={() => onSelectDate(moment())}
           >
-            {date.format("YYYY 년 MM 월")}
+            {date.format('YYYY 년 MM 월')}
             {view === componentView.WEEK && (
               <span style={{ marginLeft: 10 }}>{weekOfMonth}주</span>
             )}

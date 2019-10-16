@@ -1,11 +1,9 @@
-import { Reducer } from "redux";
-import moment, { Moment as MomentTypes } from "moment";
-import { SystemState, SystemActionType, ToastType } from "./types";
-import { Record, fromJS } from "immutable";
+import { Reducer } from 'redux';
+import { SystemState, SystemActionType, ToastType } from './types';
+import { Record, fromJS } from 'immutable';
 
 const Toast: Record.Factory<ToastType> = Record({
-  title: "",
-  content: ""
+  title: ''
 });
 
 export const InitalState: SystemState = fromJS({
@@ -13,12 +11,12 @@ export const InitalState: SystemState = fromJS({
 });
 
 const pushToast = (state, toast) => {
-  let getQueue = state.get("queue");
-  return state.set("queue", getQueue.push(new Toast(toast)));
+  let getQueue = state.get('queue');
+  return state.set('queue', getQueue.push(new Toast(toast)));
 };
 const shiftToast = state => {
-  let getQueue = state.get("queue");
-  return state.set("queue", getQueue.shift());
+  let getQueue = state.get('queue');
+  return state.set('queue', getQueue.shift());
 };
 
 const reducer: Reducer<SystemState> = (state = InitalState, action) => {

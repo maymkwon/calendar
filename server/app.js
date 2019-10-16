@@ -98,9 +98,11 @@ app.post('/update', (req, res, next) => {
 });
 
 app.listen(3001, () => {
-  console.log('HELLO node 연결!');
+  console.log('HELLO node 연결! (:3001)');
 });
-
+client.on('error', err => {
+  console.log('redis 연결 실패 서버를 실행 해 주세요');
+});
 client.on('connect', () => {
-  console.log('redis database 연결');
+  console.log('redis 연결 성공');
 });

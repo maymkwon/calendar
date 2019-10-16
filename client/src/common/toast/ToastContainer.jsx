@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
-import { SystemState, ToastType } from "../../store/system/types";
 import TransitionGroup from "react-transition-group/TransitionGroup";
 import ToastMessage from "./ToastMessage";
 import FadeIn from "./FadeIn";
@@ -23,7 +22,7 @@ class ToastContainer extends Component {
           {toast.map((toast, i) => {
             return (
               <FadeIn keyProps={i} key={i} duration={300}>
-                <ToastMessage title={toast.title} content={toast.content} />
+                <ToastMessage title={toast.title} />
               </FadeIn>
             );
           })}

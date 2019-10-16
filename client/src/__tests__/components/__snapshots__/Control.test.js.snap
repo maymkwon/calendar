@@ -1,0 +1,107 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Controls /> render() renders the component 1`] = `
+<StyledComponent
+  forwardedComponent={
+    Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "attrs": Array [
+        Object {
+          "className": "c-control dfacjsb",
+        },
+      ],
+      "componentStyle": ComponentStyle {
+        "componentId": "sc-bxivhb",
+        "isStatic": false,
+        "rules": Array [
+          "
+  padding: 0 20px;
+  border-bottom: 1px solid #eee;
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 999;
+  .c-control {
+    &__term {
+      .basic-btn:first-child {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+      .basic-btn:last-child {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+      .basic-btn + .basic-btn {
+        border-left: 0;
+      }
+    }
+
+    &__currnet {
+      font-size: 24px;
+      margin-left: 20px;
+    }
+  }
+",
+        ],
+      },
+      "displayName": "styled.div",
+      "foldedComponentIds": Array [],
+      "render": [Function],
+      "styledComponentId": "sc-bxivhb",
+      "target": "div",
+      "toString": [Function],
+      "usesTheme": false,
+      "warnTooManyClasses": [Function],
+      "withComponent": [Function],
+    }
+  }
+  forwardedRef={null}
+  id="controls"
+>
+  <div
+    className="dfac"
+  >
+    <Styled(styled.button)
+      className="dfacjcc"
+      onClick={[Function]}
+      size={50}
+    >
+      <MdChevronLeft
+        size={30}
+      />
+    </Styled(styled.button)>
+    <Styled(styled.button)
+      className="dfacjcc"
+      onClick={[Function]}
+      size={50}
+    >
+      <MdChevronRight
+        size={30}
+      />
+    </Styled(styled.button)>
+    <div
+      className="c-control__currnet"
+      onClick={[Function]}
+      role="button"
+    >
+      2019 년 10 월
+    </div>
+  </div>
+  <div
+    className="c-control__term"
+  >
+    <Styled(styled.button)
+      className=""
+      onClick={[Function]}
+    >
+      월
+    </Styled(styled.button)>
+    <Styled(styled.button)
+      className=""
+      onClick={[Function]}
+    >
+      주
+    </Styled(styled.button)>
+  </div>
+</StyledComponent>
+`;

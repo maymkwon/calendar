@@ -7,8 +7,8 @@
 # Table of Contents
 1. [실행 방법](#start)
 2. [빌드 방법](#build)
-3. [Third Example](#third-example)
-4. [Fourth Example](#fourth-examplehttpwwwfourthexamplecom)
+3. [사용 라이브러리](#library)
+4. [폴더 구조](#structure)
 
 ***
 
@@ -40,27 +40,22 @@ wget 대신 [redis 공식 페이지](https://redis.io/topics/quickstart) 에서 
 2. node js 실행
   1. `cd ./server` 클라이언트 폴더로 이동
   2. `npm i` 커맨드 입력 
-  3. `nodemon app.js` 커맨드 입력
+  3. `npm i nodemon -g` 커맨드 입력
+  4. `nodemon app.js` 커맨드 입력
 
 ***
-
-
-
 
 ## 빌드 방법 <a name="build"></a>
 
 `npm run build`
 
 > 라우팅을 브라우저 히스토리로 작업을 하였습니다. 
-> 빌드 후 결과물을 보시려면 `npx serve -s build` 커맨드를 실행 해 주세요
+> 빌드 후 결과물을 보시려면 `npx serve -s build` 커맨드를 실행 해 주세요.
 > 빌드 후 간단한 로컬 서버에 올려서 보실 수 있습니다.
 
 ***
 
-
-
-
-## 프로젝트 사용 라이브러리 <a name="build" />
+## 프로젝트 사용 라이브러리 <a name="library" />
 
 **Client**
 
@@ -100,7 +95,7 @@ wget 대신 [redis 공식 페이지](https://redis.io/topics/quickstart) 에서 
 
 ***
 
-## 폴더구조
+## 폴더구조 <a name="structure"></a>
 
 ```
 .src

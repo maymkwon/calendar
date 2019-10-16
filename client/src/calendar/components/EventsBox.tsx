@@ -1,11 +1,10 @@
-import React, { Component } from "react";
-import styled from "styled-components";
-import moment from "moment";
-import { DateData } from "../../store/calendar/types";
-import * as dateUtils from "../../utils/dates";
-import Popup from "../../common/popup";
+import React, { Component } from 'react';
+import styled from 'styled-components';
+import moment from 'moment';
+import { DateData } from '../../store/calendar/types';
+import Popup from '../../common/popup';
 const Div = styled.div.attrs({
-  className: "event-list"
+  className: 'event-list'
 })`
   position: relative;
   &.event-list {
@@ -41,8 +40,7 @@ class EventsBox extends Component<Props> {
   onDragStart = (e, event) => {
     this.props.setDragData(event);
     let dataId = e.target.id;
-    e.dataTransfer.setData("text/plain", dataId);
-    e.currentTarget.style.backgroundColor = "red";
+    e.dataTransfer.setData('text/plain', dataId);
   };
   onClickEvent = (e, event) => {
     e.stopPropagation();
@@ -73,11 +71,11 @@ class EventsBox extends Component<Props> {
                 className="event-list__item"
                 onClick={e => this.onClickEvent(e, o)}
                 style={{
-                  position: "absolute",
+                  position: 'absolute',
                   top: `${i * 22}px`,
                   right: 10,
                   left: 10,
-                  height: `${view === "week" && calHour * 50}px`,
+                  height: `${view === 'week' && calHour * 50}px`,
                   zIndex: 999
                 }}
               >

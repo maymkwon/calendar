@@ -77,7 +77,7 @@ class Week extends Component<Props> {
   };
 
   renderView = () => {
-    const { events, deleteEvent, updateEvent, view, setDragData } = this.props;
+    const { events, deleteEvent, updateEvent, view } = this.props;
     let weekdays = dateUtils.getSlot();
     let { startDay, endDay, start } = this.getStartEndData();
 

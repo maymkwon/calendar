@@ -57,7 +57,6 @@ class CalendarView extends Component<Props> {
       end: newEndDate
     };
 
-    dragEl.style.backgroundColor = 'blue';
     // dropZone.appendChild(dragEl);
     this.props.updateEvent(newObj);
     e.dataTransfer.clearData();

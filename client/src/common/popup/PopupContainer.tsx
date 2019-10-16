@@ -1,6 +1,6 @@
-import React, { Component, useEffect } from "react";
-import { LayerPopup } from "../layerpopup";
-import { ModalWrapper, Dim } from "../../style/SCPopup";
+import React, { useEffect } from 'react';
+import { LayerPopup } from '../layerpopup';
+import { ModalWrapper, Dim } from '../../style/SCPopup';
 
 interface Props {
   location: any;
@@ -24,9 +24,9 @@ const PopupContainer = (props: Props) => {
   const { popupWidth, position } = props;
 
   useEffect(() => {
-    document.body.style.overflow = "hidden";
+    document.body.style.overflow = 'hidden';
     return () => {
-      document.body.style.overflow = "visible";
+      document.body.style.overflow = 'visible';
     };
   });
 

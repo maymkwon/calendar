@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import { componentView } from "../../utils/constants";
-import Week from "./Week";
-import Month from "./Month";
-import { DateData } from "../../store/calendar/types";
-import { Moment as MomentTypes } from "moment";
+import React from 'react';
+import { componentView } from '../../utils/constants';
+import Week from './Week';
+import Month from './Month';
+import { DateData } from '../../store/calendar/types';
+import { Moment as MomentTypes } from 'moment';
 
 interface Props {
   view: string;

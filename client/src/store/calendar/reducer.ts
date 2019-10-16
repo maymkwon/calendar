@@ -1,11 +1,11 @@
-import { Reducer } from "redux";
-import moment, { Moment as MomentTypes } from "moment";
-import { CalendarState, CalendarActionTypes } from "./types";
+import { Reducer } from 'redux';
+import moment from 'moment';
+import { CalendarState, CalendarActionTypes } from './types';
 
 export const initalState: CalendarState = {
   date: moment(),
   events: [],
-  view: "month",
+  view: 'month',
   dragSetData: {}
 };
 
