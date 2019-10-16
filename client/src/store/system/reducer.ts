@@ -1,38 +1,38 @@
-import { Reducer } from 'redux'
-import moment, { Moment as MomentTypes } from 'moment';
-import { SystemState, SystemActionType, ToastType } from './types'
-import {Record, fromJS} from 'immutable'
+import { Reducer } from "redux";
+import moment, { Moment as MomentTypes } from "moment";
+import { SystemState, SystemActionType, ToastType } from "./types";
+import { Record, fromJS } from "immutable";
 
 const Toast: Record.Factory<ToastType> = Record({
-  title:'',
-  content:''
-})
+  title: "",
+  content: ""
+});
 
 export const InitalState: SystemState = fromJS({
-  queue: [],
-})
+  queue: []
+});
 
 const pushToast = (state, toast) => {
-  let getQueue = state.get('queue')
-  return state.set('queue', getQueue.push(new Toast(toast)))
-}
-const shiftToast = (state) => {
-  let getQueue = state.get('queue')
-  return state.set('queue', getQueue.shift())
-}
+  let getQueue = state.get("queue");
+  return state.set("queue", getQueue.push(new Toast(toast)));
+};
+const shiftToast = state => {
+  let getQueue = state.get("queue");
+  return state.set("queue", getQueue.shift());
+};
 
-const reducer: Reducer<SystemState> = (state = InitalState , action) => {
+const reducer: Reducer<SystemState> = (state = InitalState, action) => {
   switch (action.type) {
     case SystemActionType.PUSH_TOAST_TO_QUE: {
-      return pushToast(state, action.payload)
+      return pushToast(state, action.payload);
     }
     case SystemActionType.SHIFT_TOAST_FROM_QUE: {
-      return shiftToast(state)
+      return shiftToast(state);
     }
     default: {
-      return state
+      return state;
     }
   }
-}
+};
 
-export { reducer as SystemReducer }
+export { reducer as SystemReducer };

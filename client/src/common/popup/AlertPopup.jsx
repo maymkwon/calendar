@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { SCBasicBtn } from "../../style/Buttons";
 import { SCPopupContainer } from "../../style/SCPopup";
 
-
 class AlertPopup extends Component {
   handleClose = () => {
     this.props.layerpopup.hide(this.props.layerkey);

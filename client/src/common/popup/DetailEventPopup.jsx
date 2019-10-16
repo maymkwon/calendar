@@ -7,7 +7,6 @@ import Popup from ".";
 import { updateEvent } from "../../store/calendar/action";
 import { SCPopupContainer } from "../../style/SCPopup";
 
-
 class DetailEventPopup extends Component {
   handleClose = () => {
     this.props.layerpopup.hide(this.props.layerkey);

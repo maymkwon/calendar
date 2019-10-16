@@ -13,17 +13,17 @@ const timeSlot = dateUtils.getSlot();
 let weekdays = moment.weekdaysShort();
 
 interface Props {
-  onSelectDate: any
-  createEvent: any
-  events: object
-  deleteEvent: () => {}
-  updateEvent: (DateData: DateData) => {}
-  setDragData: (object: object) => {}
-  view: string
-  date: any,
-  dragSetData: DateData
-  showToast: (object: object) => {}
-  initDragData: () => {}
+  onSelectDate: any;
+  createEvent: any;
+  events: object;
+  deleteEvent: () => {};
+  updateEvent: (DateData: DateData) => {};
+  setDragData: (object: object) => {};
+  view: string;
+  date: any;
+  dragSetData: DateData;
+  showToast: (object: object) => {};
+  initDragData: () => {};
 }
 class Week extends Component<Props> {
   onSelectDate = (e, date) => {
@@ -32,45 +32,47 @@ class Week extends Component<Props> {
     Popup.createEventPopup({ date, createFunc: this.props.createEvent });
   };
 
-  setDragData = (data) => {
-    this.props.setDragData(data)
-  }
+  setDragData = data => {
+    this.props.setDragData(data);
+  };
 
   onDragOver = e => {
     e.preventDefault();
   };
 
   onDrop = (e, id) => {
-    const { events, dragSetData } = this.props
+    const { events, dragSetData } = this.props;
     const dataId = e.dataTransfer.getData("text");
     const dragEl = document.getElementById(dataId);
     const dropZone = document.getElementById(id);
 
-    let splitId = id.split('_')
-    let dropZoneDateTime = moment(splitId[0]).toDate()
-    let gap = dateUtils.getGap(dragSetData.start, dragSetData.end)
-    
-    let newStrtDate = dropZoneDateTime.setHours(splitId[1])
-    let newEndDate = moment(newStrtDate).add(gap, 'hour').valueOf()
+    let splitId = id.split("_");
+    let dropZoneDateTime = moment(splitId[0]).toDate();
+    let gap = dateUtils.getGap(dragSetData.start, dragSetData.end);
+
+    let newStrtDate = dropZoneDateTime.setHours(splitId[1]);
+    let newEndDate = moment(newStrtDate)
+      .add(gap, "hour")
+      .valueOf();
 
     let newObj = {
       ...dragSetData,
       start: newStrtDate,
-      end: newEndDate,
-    }
-    let dayEvent = events[id] || []
-    let newArr = [...dayEvent]
-    newArr.push(newObj)
-    let condition = dateUtils.getOverlap(newArr)
+      end: newEndDate
+    };
+    let dayEvent = events[id] || [];
+    let newArr = [...dayEvent];
+    newArr.push(newObj);
+    let condition = dateUtils.getOverlap(newArr);
     if (condition.overlap) {
-      this.props.showToast({ title: '중복 데이터', content: '' })
+      this.props.showToast({ title: "중복 데이터", content: "" });
       e.dataTransfer.clearData();
-      this.props.initDragData()
+      this.props.initDragData();
       return;
     } else {
       dragEl.style.backgroundColor = "blue";
       // dropZone.appendChild(dragEl);
-      this.props.updateEvent(newObj)
+      this.props.updateEvent(newObj);
       e.dataTransfer.clearData();
     }
   };
@@ -91,7 +93,7 @@ class Week extends Component<Props> {
   };
 
   renderView = () => {
-    const { events, deleteEvent, updateEvent, view, setDragData} = this.props;
+    const { events, deleteEvent, updateEvent, view, setDragData } = this.props;
     let weekdays = dateUtils.getSlot();
     let { startDay, endDay, start } = this.getStartEndData();
 

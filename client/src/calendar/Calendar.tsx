@@ -19,7 +19,7 @@ import {
   updateEvent,
   changeView,
   initDragData,
-setDragData
+  setDragData
 } from "../store/calendar/action";
 import { DataKeyFormat } from "../utils/constants";
 
@@ -109,12 +109,7 @@ class Calendar extends Component<AllProps, State> {
   };
 
   render() {
-    const {
-      date,
-      eventData,
-      view,
-      dragSetData,
-    } = this.props;
+    const { date, eventData, view, dragSetData } = this.props;
     return (
       <div>
         <div style={{ height: 1 }} ref={this.Trigger} />
@@ -137,7 +132,7 @@ class Calendar extends Component<AllProps, State> {
           showToast={this.props.showToast}
           initDragData={this.props.initDragData}
           setDragData={this.props.setDragData}
-              />
+        />
       </div>
     );
   }
@@ -202,7 +197,7 @@ const mapDispatchToProps: PropsFromDispatch = {
   showToast,
   changeView,
   initDragData,
-  setDragData,
+  setDragData
 };
 
 export default connect(

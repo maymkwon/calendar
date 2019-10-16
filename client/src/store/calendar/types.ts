@@ -15,11 +15,10 @@ export enum CalendarActionTypes {
   UPDATE_EVENT = "@@calendar/UPDATE_EVENT",
   SUCCESS_UPDATE_EVENT = "@@calendar/SUCCESS_UPDATE_EVENT",
 
-  CHANGE_VIEW = '@@system/CHANGE_VIEW',
-  
-  INIT_DRAG_DATA = '@@system/INIT_DRAG_DATA',
-  DRAG_SET_DATA = '@@system/DRAG_SET_DATA'
+  CHANGE_VIEW = "@@system/CHANGE_VIEW",
 
+  INIT_DRAG_DATA = "@@system/INIT_DRAG_DATA",
+  DRAG_SET_DATA = "@@system/DRAG_SET_DATA"
 }
 
 export interface DateData {
@@ -35,6 +34,6 @@ export interface DeleteData {
 export interface CalendarState {
   readonly date: MomentTypes;
   events: DateData[];
-  view:string
-  dragSetData: object
+  view: string;
+  dragSetData: object;
 }

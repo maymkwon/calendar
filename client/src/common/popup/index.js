@@ -6,15 +6,26 @@ import DetailEventPopup from "./DetailEventPopup";
 import AlertPopup from "./AlertPopup";
 
 export default class Popup {
-  
   static alert(props) {
-    return LayerPopup.show(<PopupContainer><AlertPopup {...props}/></PopupContainer>);
+    return LayerPopup.show(
+      <PopupContainer>
+        <AlertPopup {...props} />
+      </PopupContainer>
+    );
   }
   static createEventPopup(props) {
-    return LayerPopup.show(<PopupContainer><CreateEventPopup {...props}/></PopupContainer>);
+    return LayerPopup.show(
+      <PopupContainer>
+        <CreateEventPopup {...props} />
+      </PopupContainer>
+    );
   }
   static detailEventPopup(props) {
-    return LayerPopup.show(<PopupContainer><DetailEventPopup {...props}/></PopupContainer>);
+    return LayerPopup.show(
+      <PopupContainer>
+        <DetailEventPopup {...props} />
+      </PopupContainer>
+    );
   }
 
   static hide(layerkey) {
@@ -23,4 +34,3 @@ export default class Popup {
     }
   }
 }
-

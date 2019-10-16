@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import * as Moment from "moment";
 import { CView, CWeek, CDay } from "../../style/SCCalendar";
 import * as dateUtils from "../../utils/dates";
-import { DateData} from "../../store/calendar/types";
+import { DateData } from "../../store/calendar/types";
 import { DataKeyFormat } from "../../utils/constants";
 import { extendMoment } from "moment-range";
 import cn from "classnames";
@@ -13,17 +13,17 @@ const moment = extendMoment(Moment);
 let weekdays = moment.weekdaysShort();
 
 interface Props {
-  onSelectDate: any
-  createEvent: any
-  events: object
-  deleteEvent: () => {}
-  updateEvent: (DateData: DateData) => {}
-  setDragData: (object:object) => {}
-  view: string
-  date: any,
-  dragSetData: DateData
-  showToast:(object:object)=> {}
-  initDragData:()=> {}
+  onSelectDate: any;
+  createEvent: any;
+  events: object;
+  deleteEvent: () => {};
+  updateEvent: (DateData: DateData) => {};
+  setDragData: (object: object) => {};
+  view: string;
+  date: any;
+  dragSetData: DateData;
+  showToast: (object: object) => {};
+  initDragData: () => {};
 }
 
 class CalendarView extends Component<Props> {
@@ -33,52 +33,50 @@ class CalendarView extends Component<Props> {
     Popup.createEventPopup({ date, createFunc: this.props.createEvent });
   };
 
-  setDragData = (data) => {
-    this.props.setDragData(data)
-  }
+  setDragData = data => {
+    this.props.setDragData(data);
+  };
 
   onDragOver = e => {
     e.preventDefault();
   };
 
   onDrop = (e, id) => {
-    const {events, dragSetData} = this.props
+    const { events, dragSetData } = this.props;
     const dataId = e.dataTransfer.getData("text");
     const dragEl = document.getElementById(dataId);
     // const dropZone = document.getElementById(id);
-    
-    let dropZoneDate = moment(id).toDate()
-    let dragOriginStrtDate = moment(dragSetData.start).toDate()
-    let dragOriginEndDate = moment(dragSetData.end).toDate()
-    let newStrtDate = dragOriginStrtDate.setDate(dropZoneDate.getDate())
-    let newEndDate = dragOriginEndDate.setDate(dropZoneDate.getDate())
+
+    let dropZoneDate = moment(id).toDate();
+    let dragOriginStrtDate = moment(dragSetData.start).toDate();
+    let dragOriginEndDate = moment(dragSetData.end).toDate();
+    let newStrtDate = dragOriginStrtDate.setDate(dropZoneDate.getDate());
+    let newEndDate = dragOriginEndDate.setDate(dropZoneDate.getDate());
     let newObj = {
       ...dragSetData,
       start: newStrtDate,
-      end: newEndDate,
-    }
-    let dayEvent = events[id] || []
-    let newArr = [...dayEvent] 
-    newArr.push(newObj)
-    let condition = dateUtils.getOverlap(newArr)
-    
-    if (condition.overlap){
-      this.props.showToast({title:'중복 데이터', content:''})
+      end: newEndDate
+    };
+    let dayEvent = events[id] || [];
+    let newArr = [...dayEvent];
+    newArr.push(newObj);
+    let condition = dateUtils.getOverlap(newArr);
+
+    if (condition.overlap) {
+      this.props.showToast({ title: "중복 데이터", content: "" });
       e.dataTransfer.clearData();
-      this.props.initDragData()
+      this.props.initDragData();
       return;
     } else {
       dragEl.style.backgroundColor = "blue";
       // dropZone.appendChild(dragEl);
-      this.props.updateEvent(newObj)
+      this.props.updateEvent(newObj);
       e.dataTransfer.clearData();
     }
   };
 
-  
-
   renderView = () => {
-    const { date, events, deleteEvent, updateEvent, view} = this.props;
+    const { date, events, deleteEvent, updateEvent, view } = this.props;
     const today = moment();
     let weekdays = moment.weekdaysShort();
     const start = dateUtils.getStartOfMonth(date);

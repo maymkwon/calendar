@@ -9,20 +9,19 @@ interface State {
   reload: number;
 }
 
-interface LayerType<T>{
-  [x:string]: any
+interface LayerType<T> {
+  [x: string]: any;
 }
-interface LayerProps{
-  key:string
-  layerKey:string
-  location:object
-  history: object
-  layerCount:number
+interface LayerProps {
+  key: string;
+  layerKey: string;
+  location: object;
+  history: object;
+  layerCount: number;
 }
 
 class LayerPopupContainer extends Component<Props, State> {
- 
-  private layers: LayerType<LayerProps>
+  private layers: LayerType<LayerProps>;
   constructor(props) {
     super(props);
     this.fireLayerEvent = this.fireLayerEvent.bind(this);
