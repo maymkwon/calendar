@@ -82,7 +82,7 @@ wget 설치 : `brew install wget`
 * date-arithmetic
 * moment
 * moment-range
-* react-datepicker
+
 
 *스타일 관련*
 
@@ -90,6 +90,7 @@ wget 설치 : `brew install wget`
 
 기타
 * react-select
+* react-datepicker
 
 **Server**
 
