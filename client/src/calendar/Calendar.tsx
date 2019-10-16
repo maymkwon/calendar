@@ -100,6 +100,7 @@ class Calendar extends Component<AllProps, State> {
   }
 
   onChangeView = view => {
+    if (this.props.view === view) return;
     this.props.changeView(view);
   };
 
