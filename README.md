@@ -2,7 +2,7 @@
 
 이 프로젝트는 [Create React App](https://github.com/facebook/create-react-app) 을 사용 하였습니다.
 
-# 카카오 사전 과제 저장소
+# 카카오 페이 사전 과제 저장소
 **목차**
 # Table of Contents
 1. [실행 방법](#start)
