@@ -43,8 +43,8 @@ class CalendarView extends Component<Props> {
 
   onDrop = (e, id) => {
     const { dragSetData } = this.props;
-    const dataId = e.dataTransfer.getData('text');
-    const dragEl = document.getElementById(dataId);
+    // const dataId = e.dataTransfer.getData('text');
+    // const dragEl = document.getElementById(dataId);
 
     let dropZoneDate = moment(id).toDate();
     let dragOriginStrtDate = moment(dragSetData.start).toDate();

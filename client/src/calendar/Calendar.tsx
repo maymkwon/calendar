@@ -49,12 +49,7 @@ interface State {
 }
 
 class Calendar extends Component<AllProps, State> {
-  constructor(props: AllProps) {
-    super(props);
-    this.state = {
-      selectDate: moment()
-    };
-  }
+
   Trigger = React.createRef<HTMLDivElement>();
 
   onChangeDate = (direction: string) => {
@@ -70,13 +65,7 @@ class Calendar extends Component<AllProps, State> {
   };
 
   onSelectDate = selectDate => {
-    const { changeDate } = this.props;
-    this.setState(
-      {
-        selectDate
-      },
-      () => changeDate({ date: selectDate })
-    );
+    this.props.changeDate({ date: selectDate })
   };
 
   componentDidMount() {

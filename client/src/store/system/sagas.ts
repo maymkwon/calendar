@@ -1,7 +1,7 @@
 import { SystemActionType } from './types';
 import { put, takeEvery, delay, fork } from 'redux-saga/effects';
 
-function* toastQueue(action) {
+export function* toastQueue(action) {
   yield put({
     type: SystemActionType.PUSH_TOAST_TO_QUE,
     payload: action.payload

@@ -20,11 +20,9 @@ class DetailEventPopup extends Component {
     isEdit: false,
     startDate: null,
     title: "",
-    startTimeOption: null,
+    startTimeOption: timeOption[moment().hours()],
     endTimeOption: null,
-    eventState: {
-      
-    },
+   
   };
 
   handleClose = () => {

@@ -1,6 +1,5 @@
 import { fork, put, takeEvery, call, select } from 'redux-saga/effects';
 import { CalendarActionTypes } from './types';
-import { SystemActionType } from '../system/types';
 import { createEvent, deleteEvent, updateEvent } from './action';
 import { getOverlap } from '../../utils/dates';
 import {
@@ -9,6 +8,7 @@ import {
   postFetchDeleteEvent,
   postFetchUpdateEvent
 } from '../../services/calendarServices';
+import { showToast} from '../system/action'
 import Popup from '../../common/popup';
 
 export const getEventsSelect = state => state.calendar.events;
@@ -47,16 +47,11 @@ export function* eventCreate(action: ReturnType<typeof createEvent>) {
       action.meta();
     }
 
-    yield put({
-      type: SystemActionType.SHOW_TOAST,
-      payload: { title: '등록 완료' }
-    });
+    yield put(showToast({ title: '등록 완료' }))
     yield put({ type: CalendarActionTypes.GET_EVENT });
   } catch (e) {
-    yield put({
-      type: SystemActionType.SHOW_TOAST,
-      payload: { title: e ? e.toString() : '알 수 없는 오류' }
-    });
+    yield put(showToast({ title: e ? e.toString() : '알 수 없는 오류' }))
+   
   }
 }
 
@@ -75,17 +70,11 @@ export function* eventDelete(action: ReturnType<typeof deleteEvent>) {
       action.meta();
     }
 
-    yield put({
-      type: SystemActionType.SHOW_TOAST,
-      payload: { title: '삭제 완료' }
-    });
+    yield put(showToast({ title: '삭제 완료' }))
 
     yield put({ type: CalendarActionTypes.GET_EVENT });
   } catch (e) {
-    yield put({
-      type: SystemActionType.SHOW_TOAST,
-      payload: { title: '알 수 없는 오류' }
-    });
+    yield put(showToast({ title: '알 수 없는 오류' }))
   }
 }
 
@@ -103,20 +92,19 @@ export function* eventUpdate(action: ReturnType<typeof updateEvent>) {
       action.meta();
     }
 
-    yield put({
-      type: SystemActionType.SHOW_TOAST,
-      payload: { title: '수정 완료' }
-    });
+    yield put(showToast({ title: '수정 완료' }))
+    
     yield put({
       type: CalendarActionTypes.INIT_DRAG_DATA
     });
 
     yield put({ type: CalendarActionTypes.GET_EVENT });
   } catch (e) {
-    yield put({
-      type: SystemActionType.SHOW_TOAST,
-      payload: { title: e ? e.toString() : '알 수 없는 오류' }
-    });
+    yield put(showToast({ title: e ? e.toString() : '알 수 없는 오류' }))
+    // yield put({
+    //   type: SystemActionType.SHOW_TOAST,
+    //   payload: { title: e ? e.toString() : '알 수 없는 오류' }
+    // });
   }
 }
 

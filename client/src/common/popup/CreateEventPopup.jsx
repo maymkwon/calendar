@@ -16,7 +16,7 @@ class CreateEventPopup extends Component {
   state = {
     startDate: null,
     title: "",
-    startTimeOption: null,
+    startTimeOption: timeOption[moment().hours()],
     endTimeOption: null
   };
   handleClose = () => {
