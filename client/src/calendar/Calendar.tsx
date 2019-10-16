@@ -115,7 +115,6 @@ class Calendar extends Component<AllProps, State> {
       view,
       dragSetData,
     } = this.props;
-    console.log("this.props.view", this.props);
     return (
       <div>
         <div style={{ height: 1 }} ref={this.Trigger} />

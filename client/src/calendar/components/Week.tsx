@@ -45,35 +45,23 @@ class Week extends Component<Props> {
     const dataId = e.dataTransfer.getData("text");
     const dragEl = document.getElementById(dataId);
     const dropZone = document.getElementById(id);
-    console.log(dropZone)
 
     let splitId = id.split('_')
-    console.log(splitId)
     let dropZoneDateTime = moment(splitId[0]).toDate()
-    // let dropZoneDate = moment(id).toDate()
     let gap = dateUtils.getGap(dragSetData.start, dragSetData.end)
-    console.log('dropZoneDate', dropZoneDateTime)
     
-    console.log(gap)
-    // let dragOriginStrtDate = moment(dragSetData.start).toDate()
-    // let dragOriginEndDate = moment(dragSetData.end).toDate()
     let newStrtDate = dropZoneDateTime.setHours(splitId[1])
     let newEndDate = moment(newStrtDate).add(gap, 'hour').valueOf()
 
-    // console.log('start', moment(newStrtDate).format('YYYY-MM-DD HH'))
-    console.log('end', newStrtDate)
-    console.log('end', newEndDate)
     let newObj = {
       ...dragSetData,
       start: newStrtDate,
       end: newEndDate,
     }
-    console.log(events[id])
     let dayEvent = events[id] || []
     let newArr = [...dayEvent]
     newArr.push(newObj)
     let condition = dateUtils.getOverlap(newArr)
-    console.log(condition)
     if (condition.overlap) {
       this.props.showToast({ title: '중복 데이터', content: '' })
       e.dataTransfer.clearData();

@@ -8,6 +8,7 @@ const Container = styled.div`
   background-color:black;
   color:#fff;
   text-align:center;
+  margin:5px 0;
   
 `
 

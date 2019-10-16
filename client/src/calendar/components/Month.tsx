@@ -34,7 +34,6 @@ class CalendarView extends Component<Props> {
   };
 
   setDragData = (data) => {
-    console.log('setDragData',data)
     this.props.setDragData(data)
   }
 
@@ -63,7 +62,6 @@ class CalendarView extends Component<Props> {
     newArr.push(newObj)
     let condition = dateUtils.getOverlap(newArr)
     
-    console.log('conditionconditionconditionconditioncondition', condition)
     if (condition.overlap){
       this.props.showToast({title:'중복 데이터', content:''})
       e.dataTransfer.clearData();

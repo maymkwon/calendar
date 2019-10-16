@@ -48,7 +48,6 @@ class CreateEventPopup extends Component {
       return;
     }
     let origin = moment(startDate).toDate();
-    console.log(origin)
     const start = origin.setHours(startTimeOption.value)
     const end = origin.setHours(endTimeOption.value)
     let data = {
@@ -73,7 +72,6 @@ class CreateEventPopup extends Component {
 
   render() {
     const { startTimeOption,  endTimeOption} = this.state
-    console.log(this.state)
     return (
       <SCPopupContainer>
         <div className="pop-header">
