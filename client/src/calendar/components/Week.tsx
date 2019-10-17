@@ -52,6 +52,16 @@ class Week extends Component<Props> {
       .add(gap, 'hour')
       .valueOf();
 
+    const dayEndTime = moment(splitId[0])
+      .clone()
+      .endOf('day')
+      .valueOf();
+
+    if (dayEndTime < newEndDate) {
+      Popup.alert({ message: '일정이 하루 초과합니다.' });
+      return;
+    }
+
     let newObj = {
       ...dragSetData,
       start: newStrtDate,

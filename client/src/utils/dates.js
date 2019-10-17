@@ -33,6 +33,10 @@ export function cloneDate(date) {
 export function getStartOfDay(date) {
   return getStartOf(date, 'day');
 }
+export function getEndOfDay(date) {
+  let newDate = cloneDate(date);
+  return getEndOf(newDate, 'day');
+}
 
 export function getStartOfWeek(date) {
   let newDate = cloneDate(date);
